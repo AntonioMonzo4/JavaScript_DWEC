@@ -1,64 +1,46 @@
-
-class Colegio {
-
-    constructor(nombre,numAulas){
-        this.nombre=nombre;
-        this.numAulas=numAulas;
-        this.numAlumnos=0;
-        this.todosAlumnos=new Array();
+class Alumno {
+    constructor(dni, nombre, notaMedia) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.notaMedia = notaMedia;
     }
 
-    insertarAlumno(Alumno){
-        this.todosAlumnos.push(Alumno);
+    modificarNota(nuevaNota) {
+        this.notaMedia = nuevaNota;
     }
-
-    get notaMediaC(){
-        for(i=0;i<todosAlumnos.length;i++){
-
-            notaMediaC=NotaMediaC+todosAlumnos[i].nota_media;
-        }
-        return this.notaMediaC;
-    }
-
-
-    
-
-
-   
 }
 
-
-class Alumno {
-    constructor(DNI,nombre,nnota_media) {
-        this.DNI=DNI;
-        this.nombre=nombre;
-        this.nota_media=nnota_media;
-        
+class Colegio {
+    constructor(nombre, numAulas) {
+        this.nombre = nombre;
+        this.numAulas = numAulas;
+        this.alumnos = [];
     }
 
-    get nota_media(){
-        return this.nota_media;
+    añadirAlumno(alumno) {
+        this.alumnos.push(alumno);
     }
 
-   
+    modificarNotaAlumno(dni, nuevaNota) {
+        const alumno = this.alumnos.find(a => a.dni === dni);
+        if (alumno) {
+            alumno.modificarNota(nuevaNota);
+        } else {
+            console.log("Alumno con DNI " + dni + " no encontrado.");
+        }
+    }
 
-} 
+    mostrarInfo() {
+        console.log("Colegio: " + this.nombre + ", Aulas: " + this.numAulas + ", Total Alumnos: " + this.alumnos.length);
+    }
+}
 
+const colegio = new Colegio("Colegio San Juan", 10);
+const alumno1 = new Alumno("12345678A", "Juan", 7.5);
+const alumno2 = new Alumno("23456789B", "Ana", 8.0);
 
-IES= new Colegio("IES",42);
-
-Juan=new Alumno(544,"Juan",5);
-Pepa=new Alumno(543,"Pepa",7);
-Pepe=new Alumno(542,"Pepe",6);
-Jorge=new Alumno(514,"Jorge",8);
-Pedro=new Alumno(547,"Pedro",4);
-
-IES.insertarAlumno(Juan);
-IES.insertarAlumno(Pepe);
-IES.insertarAlumno(Pepa);
-IES.insertarAlumno(Jorge);
-IES.insertarAlumno(Pedro);
-
-console.log(IES.notaMediaC);
-
-
+colegio.añadirAlumno(alumno1);
+colegio.añadirAlumno(alumno2);
+colegio.mostrarInfo();
+colegio.modificarNotaAlumno("12345678A", 9.0);
+console.log(alumno1);

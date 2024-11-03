@@ -1,17 +1,12 @@
 class Paciente {
-
-    constructor(nombre) {
-
+    constructor(nombre, personalAsignado) {
         this.nombre = nombre;
+        this.personalAsignado = personalAsignado;
     }
 
-    set medico(Personal) {
-
-        if (Personal.especialidad === "medico") {
-            this.medico = Personal;
-        }
+    toString() {
+        return "Paciente: "+this.nombre+ "Personal Asignado: "+this.personalAsignado.nombre;
     }
-
-   
-
 }
+
+

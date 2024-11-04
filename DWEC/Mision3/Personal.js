@@ -5,7 +5,7 @@ class Personal {
     }
 
     toString() {
-        return "Personal: "+this.nombre+ " Especialidad: "+this.especialidad;
+        return "Personal: " + this.nombre + " Especialidad: " + this.especialidad;
     }
 }
 

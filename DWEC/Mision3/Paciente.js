@@ -5,7 +5,7 @@ class Paciente {
     }
 
     toString() {
-        return "Paciente: "+this.nombre+ "Personal Asignado: "+this.personalAsignado.nombre;
+        return "Paciente: " + this.nombre + " Personal Asignado: " + this.personalAsignado.nombre;
     }
 }
 

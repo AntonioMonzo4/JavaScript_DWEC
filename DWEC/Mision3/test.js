@@ -1,72 +1,95 @@
+
+
+
+
+function eliminarPersonal(nombre) {
+    var nuevoPersonal = [];
+    for (var i = 0; i < hospital.personal.length; i++) {
+        if (hospital.personal[i].nombre !== nombre) {
+            nuevoPersonal.push(hospital.personal[i]);
+        }
+    }
+    hospital.personal = nuevoPersonal;
+}
+
+function eliminarPaciente(nombre) {
+    var nuevosPacientes = [];
+    for (var i = 0; i < hospital.pacientes.length; i++) {
+        if (hospital.pacientes[i].nombre !== nombre) {
+            nuevosPacientes.push(hospital.pacientes[i]);
+        }
+    }
+    hospital.pacientes = nuevosPacientes;
+}
+
+
+function visualizarHospital() {
+    console.log(hospital.toString());
+}
+
+
+function visualizarPersonal() {
+    for (var i = 0; i < hospital.personal.length; i++) {
+        console.log(hospital.personal[i].toString());
+    }
+}
+
+function visualizarPacientes() {
+    for (var i = 0; i < hospital.pacientes.length; i++) {
+        console.log(hospital.pacientes[i].toString());
+    }
+}
+
+function mostrarPacientesPorMedico(nombreMedico) {
+    var listaPacientes = [];
+    for (var i = 0; i < hospital.pacientes.length; i++) {
+        if (hospital.pacientes[i].personalAsignado.nombre === nombreMedico) {
+            listaPacientes.push(hospital.pacientes[i].nombre);
+        }
+    }
+    console.log("Médico: " + nombreMedico + " Pacientes: " + (listaPacientes.length ? listaPacientes.join(", ") : "Ninguno"));
+}
+
+
 var hospital = new Hospital("Hospital San Lorenzo", "El Escorial", "Jose");
 
+var medico1 = new Personal("Ana", "médico");
+var medico2 = new Personal("Pepe", "médico");
 
-var medica = new Personal("Ana", "médico");
-var medico = new Personal("Pepe", "médico");
-var enfermero = new Personal("Luis", "enfermera");
-var enfermera = new Personal("Aurora", "enfermera");
+hospital.aPersonal(medico1);
+hospital.aPersonal(medico2);
 
+var paciente1 = new Paciente("Carlos", medico1);   
+var paciente2 = new Paciente("Maria", medico2);    
+var paciente3 = new Paciente("Luis", medico1);     
 
-var paciente1 = new Paciente("Carlos", medica);
-var paciente2 = new Paciente("Maria", medica);
-var paciente3 = new Paciente("Jose", medico);
-var paciente4 = new Paciente("Emilio", medico);
+hospital.aPaciente(paciente1);
+hospital.aPaciente(paciente2);
+hospital.aPaciente(paciente3);
 
-// Prueba la creación de un hospital
-function testCreacionHospital() {
-    console.log("Prueba: Creación de Hospital");
+console.log("Información del hospital:");
+visualizarHospital();
 
-    // Muestra la representación en cadena del hospital creado
-    console.log(hospital.toString());
-}
+console.log("\nLista de personal:");
+visualizarPersonal();
 
-// Prueba la adición de personal a un hospital
-function testAgregarPersonalAHospital() {
-    console.log("Prueba: Agregar Personal al Hospital");
-
-
-    // Agrega el personal al hospital
-    hospital.aPersonal(medica);
-    hospital.aPersonal(enfermero);
-
-    // Muestra la representación en cadena del hospital con el personal agregado
-    console.log(hospital.toString());
-}
-
-// Prueba la adición de pacientes al hospital
-function testAgregarPacienteAHospital() {
-    console.log("Prueba: Agregar Paciente al Hospital");
-
-    // Agrega los pacientes al hospital
-    hospital.aPaciente(paciente1);
-    hospital.aPaciente(paciente2);
-
-    // Muestra la representación en cadena del hospital con los pacientes agregados
-    console.log(hospital.toString());
-}
-
-// Prueba para mostrar los pacientes asignados a un médico específico
-function testMostrarPacientesPorMedico() {
-    console.log("Prueba: Mostrar Pacientes de un Médico");
+console.log("\nLista de pacientes:");
+visualizarPacientes();
 
 
-    // Agrega al hospital
-    
-    hospital.aPersonal(medico);
-    hospital.aPersonal(enfermera);
+console.log("\nPacientes de Ana:");
+mostrarPacientesPorMedico("Ana");
 
-    // Agrega los pacientes al hospital
-    hospital.aPaciente(paciente3);
-    hospital.aPaciente(paciente4);
+console.log("\nPacientes de Pepe:");
+mostrarPacientesPorMedico("Pepe");
 
-    // Muestra los pacientes asignados al médico 
-    console.log(hospital.mostrarPacientesPorMedico("Pepe"));
-    console.log(hospital.mostrarPacientesPorMedico("Ana"));
 
-}
+eliminarPersonal("Pepe");
+eliminarPaciente("Carlos");
 
-// Ejecutar todas las pruebas
-testCreacionHospital();
-testAgregarPersonalAHospital();
-testAgregarPacienteAHospital();
-testMostrarPacientesPorMedico();
+console.log("\nLista de personal después de eliminar a Pepe:");
+visualizarPersonal();
+
+console.log("\nLista de pacientes después de eliminar a Carlos:");
+visualizarPacientes();
+

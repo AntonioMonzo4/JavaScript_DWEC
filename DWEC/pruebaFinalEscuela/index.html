@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Escuela</title>
+  <script src="escuela.js"></script>
+  <script src="profesor.js"></script>
+  <script src="alumno.js"></script>
+  <script src="gestion.js"></script>
+  
+</head>
+<body>
+  <h1>Gestión de Escuelas</h1>
+
+  <!-- Sección de Escuela -->
+  <section>
+    <h2>Gestión de Escuela</h2>
+    <h3>Agregar Escuela</h3>
+    <input type="text" id="nombreEscuela" placeholder="Nombre">
+    <input type="text" id="localidadEscuela" placeholder="Localidad">
+    <input type="text" id="responsableEscuela" placeholder="Responsable">
+    <button onclick="agregarEscuela()">Guardar Escuela</button>
+    <button onclick="mostrarEscuelas()">Mostrar Escuelas</button>
+    <button onclick="modificarEscuela()">Modificar Escuela</button>
+    <button onclick="eliminarEscuela()">Eliminar Escuela</button>
+  </section>
+
+  <!-- Sección de Profesor -->
+  <section>
+    <h2>Gestión de Profesor</h2>
+    <h3>Agregar Profesor</h3>
+    <input type="text" id="nombreProfesor" placeholder="Nombre">
+    <input type="text" id="tipoProfesor" placeholder="Tipo (ciencias, letras, mixto)">
+    <button onclick="agregarProfesor()">Guardar Profesor</button>
+    <button onclick="mostrarProfesores()">Mostrar Profesores</button>
+    <button onclick="modificarProfesor()">Modificar Profesor</button>
+    <button onclick="eliminarProfesor()">Eliminar Profesor</button>
+  </section>
+
+  <!-- Sección de Alumno -->
+  <section>
+    <h2>Gestión de Alumno</h2>
+    <h3>Agregar Alumno</h3>
+    <input type="text" id="nombreAlumno" placeholder="Nombre">
+    <input type="text" id="cursoAlumno" placeholder="Curso">
+    <input type="text" id="profesorAlumno" placeholder="Profesor Responsable">
+    <button onclick="agregarAlumno()">Guardar Alumno</button>
+    <button onclick="mostrarAlumnos()">Mostrar Alumnos</button>
+    <button onclick="modificarAlumno()">Modificar Alumno</button>
+    <button onclick="eliminarAlumno()">Eliminar Alumno</button>
+  </section>
+
+  <script>
+    // Funciones de Agregar
+    function agregarEscuela() {
+      var nombre = document.getElementById('nombreEscuela').value;
+      var localidad = document.getElementById('localidadEscuela').value;
+      var responsable = document.getElementById('responsableEscuela').value;
+      var escuela = new Escuela(nombre, localidad, responsable);
+      guardarEscuela(escuela);
+      alert('Escuela guardada');
+    }
+
+    function agregarProfesor() {
+      var nombre = document.getElementById('nombreProfesor').value;
+      var tipo = document.getElementById('tipoProfesor').value;
+      var profesor = new Profesor(nombre, tipo);
+      guardarProfesor(profesor);
+      alert('Profesor guardado');
+    }
+
+    function agregarAlumno() {
+      var nombre = document.getElementById('nombreAlumno').value;
+      var curso = document.getElementById('cursoAlumno').value;
+      var profesor = document.getElementById('profesorAlumno').value;
+      var alumno = new Alumno(nombre, curso, profesor);
+      guardarAlumno(alumno);
+      alert('Alumno guardado');
+    }
+
+    
+    // Funciones de Modificar (Ejemplo básico)
+    function modificarEscuela() {
+      var index = prompt("Ingrese el índice de la escuela a modificar:");
+      var nombre = prompt("Nuevo nombre:");
+      var localidad = prompt("Nueva localidad:");
+      var responsable = prompt("Nuevo responsable:");
+      var escuela = new Escuela(nombre, localidad, responsable);
+      modificarDatos('escuelas', index, escuela);
+      alert('Escuela modificada');
+    }
+
+    function modificarProfesor() {
+      var index = prompt("Ingrese el índice del profesor a modificar:");
+      var nombre = prompt("Nuevo nombre:");
+      var tipo = prompt("Nuevo tipo:");
+      var profesor = new Profesor(nombre, tipo);
+      modificarDatos('profesores', index, profesor);
+      alert('Profesor modificado');
+    }
+
+    function modificarAlumno() {
+      var index = prompt("Ingrese el índice del alumno a modificar:");
+      var nombre = prompt("Nuevo nombre:");
+      var curso = prompt("Nuevo curso:");
+      var profesor = prompt("Nuevo profesor responsable:");
+      var alumno = new Alumno(nombre, curso, profesor);
+      modificarDatos('alumnos', index, alumno);
+      alert('Alumno modificado');
+    }
+
+    // Funciones de Eliminar (Ejemplo básico)
+    function eliminarEscuela() {
+      var index = prompt("Ingrese el índice de la escuela a eliminar:");
+      eliminarObjeto('escuelas', index);
+      alert('Escuela eliminada');
+    }
+
+    function eliminarProfesor() {
+      var index = prompt("Ingrese el índice del profesor a eliminar:");
+      eliminarObjeto('profesores', index);
+      alert('Profesor eliminado');
+    }
+
+    function eliminarAlumno() {
+      var index = prompt("Ingrese el índice del alumno a eliminar:");
+      eliminarObjeto('alumnos', index);
+      alert('Alumno eliminado');
+    }
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-// Clase Profesor
+
 class Profesor {
     constructor(nombre, tipo, escuela) {
         this.nombre = nombre;
@@ -7,74 +7,139 @@ class Profesor {
     }
 }
 
-// Función agregar
 function agregarProfesor() {
-    let escuelasC = JSON.parse(localStorage.getItem("escuelas")) || [];
-    let nombre = document.getElementById("nombreProfesor").value;
-    let tipo = document.getElementById("tipoProfesor").value;
-    let escuelaNombre = document.getElementById("escuelaProfesor").value;
+    var escuelasGuardadas = JSON.parse(localStorage.getItem("escuelas")) || [];
+    var nombreProfesor = document.getElementById("nombreProfesor").value;
+    var tipoProfesor = document.getElementById("tipoProfesor").value;
+    var nombreEscuela = document.getElementById("escuelaProfesor").value;
 
-    let escuela = escuelasC.find(e => e.nombre === escuelaNombre);
-    if (escuela) {
-        let profesorNuevo = new Profesor(nombre, tipo, escuelaNombre);
-        escuela.ArrayProfesores.push(profesorNuevo);
-        localStorage.setItem("escuelas", JSON.stringify(escuelasC));
-        alert("Profesor agregado");
-    } else {
-        alert("Escuela no encontrada");
+    var escuelaEncontrada = null;
+    var profesorExistenteEnOtraEscuela = false;
+
+    for (var i = 0; i < escuelasGuardadas.length; i++) {
+        if (escuelasGuardadas[i].nombre == nombreEscuela) {
+            escuelaEncontrada = escuelasGuardadas[i];
+            break;
+        }
     }
-}
 
-// Función eliminar
-function eliminarProfesor() {
-    let escuelasC = JSON.parse(localStorage.getItem("escuelas"));
-    let nombreProfesor = prompt("¿Cuál profesor quieres eliminar?");
-    let escuelaNombre = prompt("¿En qué escuela trabaja el profesor?");
+    if (escuelaEncontrada) {
+        
+        for (var j = 0; j < escuelasGuardadas.length; j++) {
+            for (var k = 0; k < escuelasGuardadas[j].ArrayProfesores.length; k++) {
+                if (escuelasGuardadas[j].ArrayProfesores[k].nombre === nombreProfesor) {
+                    profesorExistenteEnOtraEscuela = true;
+                    break;
+                }
+            }
+            if (profesorExistenteEnOtraEscuela) break;
+        }
 
-    let escuela = escuelasC.find(e => e.nombre === escuelaNombre);
-    if (escuela) {
-        escuela.ArrayProfesores = escuela.ArrayProfesores.filter(profesor => profesor.nombre !== nombreProfesor);
-        localStorage.setItem("escuelas", JSON.stringify(escuelasC));
-        alert("Profesor eliminado");
-    } else {
-        alert("Escuela no encontrada");
-    }
-}
-
-// Función modificar
-function modificarProfesor() {
-    let escuelasC = JSON.parse(localStorage.getItem("escuelas"));
-    let nombreProfesor = prompt("¿Cuál profesor quieres modificar?");
-    let escuelaNombre = prompt("¿En qué escuela trabaja el profesor?");
-
-    let escuela = escuelasC.find(e => e.nombre === escuelaNombre);
-    if (escuela) {
-        let profesor = escuela.ArrayProfesores.find(p => p.nombre === nombreProfesor);
-        if (profesor) {
-            profesor.nombre = prompt("Nuevo nombre del profesor:", profesor.nombre);
-            profesor.tipo = prompt("Nuevo tipo del profesor (ciencias, letras, mixto):", profesor.tipo);
-            localStorage.setItem("escuelas", JSON.stringify(escuelasC));
-            alert("Profesor modificado");
+        if (profesorExistenteEnOtraEscuela) {
+            alert("Este profesor ya está asignado a otra escuela.");
         } else {
-            alert("Profesor no encontrado en la escuela especificada");
+            var nuevoProfesor = new Profesor(nombreProfesor, tipoProfesor, nombreEscuela);
+            escuelaEncontrada.ArrayProfesores.push(nuevoProfesor);
+            localStorage.setItem("escuelas", JSON.stringify(escuelasGuardadas));
+            alert("Profesor "+nombreProfesor+" agregado a la escuela"+ nombreEscuela);
         }
     } else {
-        alert("Escuela no encontrada");
+        alert("Escuela no encontrada.");
     }
 }
 
-// Función mostrar datos
+function eliminarProfesor() {
+    var escuelasGuardadas = JSON.parse(localStorage.getItem("escuelas")) || [];
+    var nombreProfesorEliminar = prompt("Profesor que quieres eliminar: ");
+    var nombreEscuela = prompt("Escuela del profesor: ");
+
+    if (escuelasGuardadas) {
+        var escuelaEncontrada = null;
+        for (var i = 0; i < escuelasGuardadas.length; i++) {
+            if (escuelasGuardadas[i].nombre === nombreEscuela) {
+                escuelaEncontrada = escuelasGuardadas[i];
+                break;
+            }
+        }
+
+        if (escuelaEncontrada) {
+            var indexProfesorEliminar = -1;
+            for (var i = 0; i < escuelaEncontrada.ArrayProfesores.length; i++) {
+                if (escuelaEncontrada.ArrayProfesores[i].nombre === nombreProfesorEliminar) {
+                    indexProfesorEliminar = i;
+                    break;
+                }
+            }
+
+            if (indexProfesorEliminar !== -1) {
+                escuelaEncontrada.ArrayProfesores.splice(indexProfesorEliminar, 1);
+                localStorage.setItem("escuelas", JSON.stringify(escuelasGuardadas));
+                alert("Profesor eliminado");
+            } else {
+                alert("Profesor no encontrado en la escuela especificada");
+            }
+        } else {
+            alert("Escuela no encontrada");
+        }
+    }
+}
+
+function modificarProfesor() {
+    var escuelasGuardadas = JSON.parse(localStorage.getItem("escuelas"));
+    var nombreProfesorModificar = prompt("¿Cuál profesor quieres modificar?");
+    var nombreEscuela = prompt("¿En qué escuela trabaja el profesor?");
+
+    if (escuelasGuardadas) {
+        var escuelaEncontrada = null;
+        for (var i = 0; i < escuelasGuardadas.length; i++) {
+            if (escuelasGuardadas[i].nombre === nombreEscuela) {
+                escuelaEncontrada = escuelasGuardadas[i];
+                break;
+            }
+        }
+
+        if (escuelaEncontrada) {
+            var profesorEncontrado = null;
+            for (var i = 0; i < escuelaEncontrada.ArrayProfesores.length; i++) {
+                if (escuelaEncontrada.ArrayProfesores[i].nombre === nombreProfesorModificar) {
+                    profesorEncontrado = escuelaEncontrada.ArrayProfesores[i];
+                    break;
+                }
+            }
+
+            if (profesorEncontrado) {
+                profesorEncontrado.nombre = prompt("Nuevo nombre del profesor:", profesorEncontrado.nombre);
+                profesorEncontrado.tipo = prompt("Nuevo tipo del profesor (ciencias, letras, mixto):", profesorEncontrado.tipo);
+                localStorage.setItem("escuelas", JSON.stringify(escuelasGuardadas));
+                alert("Profesor modificado");
+            } else {
+                alert("Profesor no encontrado en la escuela especificada");
+            }
+        } else {
+            alert("Escuela no encontrada");
+        }
+    }
+}
+
 function mostrarDatosProfesor() {
-    let escuelasC = JSON.parse(localStorage.getItem("escuelas"));
-    if (escuelasC) {
-        escuelasC.forEach(escuela => {
-            console.log(`Escuela: ${escuela.nombre}`);
-            escuela.ArrayProfesores.forEach(profesor => {
-                console.log(`Nombre del Profesor: ${profesor.nombre}`);
-                console.log(`Tipo de Profesor: ${profesor.tipo}`);
-            });
-        });
+    var escuelasGuardadas = JSON.parse(localStorage.getItem("escuelas"));
+    if (escuelasGuardadas) {
+        for (var i = 0; i < escuelasGuardadas.length; i++) {
+            var escuela = escuelasGuardadas[i];
+            console.log("Escuela: "+escuela.nombre);
+            if (escuela.ArrayProfesores && escuela.ArrayProfesores.length > 0) {
+                var datosProfesores = [];
+                for (var j = 0; j < escuela.ArrayProfesores.length; j++) {
+                    datosProfesores[datosProfesores.length] = { "Nombre del Profesor": escuela.ArrayProfesores[j].nombre, "Tipo de Profesor": escuela.ArrayProfesores[j].tipo};
+                }
+                
+                console.table(datosProfesores);
+            } else {
+                console.log("No hay profesores registrados en esta escuela.");
+            }
+        }
     } else {
         console.log("No hay datos de escuelas y profesores en el localStorage.");
     }
 }
+

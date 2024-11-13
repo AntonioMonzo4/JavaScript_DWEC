@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="escuela.js"></script>
+    <script src="profesor.js"></script>
+    <script src="alumno.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    
+</head>
+<body>
+    
+    <!-- Escuela -->
+    <div id="escuela">
+        <h2>Escuela</h2>
+        <!-- Nombre escuela -->
+        <label for="nombreEscuela">Nombre:</label>
+        <input type="text" id="nombreEscuela">
+        <br><br>
+        <!-- Localidad -->
+        <label for="localidadEscuela">Localidad:</label>
+        <input type="text" id="localidadEscuela">
+        <br><br>
+        <!-- Responsable de la escuela -->
+        <label for="responsableEscuela">Responsable:</label>
+        <input type="text" id="responsableEscuela">
+        <br><br>
+        <!-- Botones escuela -->
+        <button onclick="agregarEscuela()">Agregar</button>
+        <button onclick="eliminarEscuela()">Eliminar</button>
+        <button onclick="modificarEscuela()">Modificar</button>
+        <button onclick="mostrarDatosEscuela()">Mostrar datos</button>
+    </div>
+
+    <!-- Profesor -->
+    <div id="profesor">
+        <h2>Profesor</h2>
+        <!-- Nombre profesor -->
+        <label for="nombreProfesor">Nombre del profesor:</label>
+        <input type="text" id="nombreProfesor">
+        <br><br>
+        <!-- Select tipo de profesor -->
+        <label for="tipoProfesor">Tipo profesor:</label>
+        <input type="text" id="tipoProfesor">
+        <br><br>
+        <!-- Nombre profesor -->
+        <label for="escuelaProfesor">Escuela:</label>
+        <input type="text" id="escuelaProfesor">
+        <br><br>
+
+        <!-- Botones profesor -->
+        <button onclick="agregarProfesor()">Agregar</button>
+        <button onclick="eliminarProfesor()">Eliminar</button>
+        <button onclick="modificarProfesor()">Modificar</button>
+        <button onclick="mostrarDatosProfesor()">Mostrar datos</button>
+    </div>
+
+    <!-- Alumno -->
+    <div id="alumno">
+        <h2>Alumno</h2>
+        <!-- Nombre alumno -->
+        <label for="nombreAlumno">Nombre:</label>
+        <input type="text" id="nombreAlumno">
+        <br><br>
+        <!-- Curso -->
+        <label for="cursoAlumno">Curso:</label>
+        <input type="text" id="cursoAlumno">
+        <br><br>
+        <!-- Profesor del alumno -->
+        <label for="profesorAlumno">Profesor del alumno:</label>
+        <input type="text" id="profesorAlumno">
+        <br><br>
+        <label for="escuelaAlumno">Escuela de Alumno:</label>
+        <input type="text" id="escuelaAlumno">
+        <br><br>
+        <!-- Botones alumno -->
+        <button onclick="agregarAlumno()">Agregar</button>
+        <button onclick="eliminarAlumno()">Eliminar</button>
+        <button onclick="modificarAlumno()">Modificar</button>
+        <button onclick="mostrarDatosAlumno()">Mostrar datos</button>
+        <br><br>
+      
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #e6f7e6; /* Fondo de la página con un verde muy claro */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+div {
+    background-color: #ccffcc; /* Fondo de los apartados en un verde claro */
+    border: 2px solid #99e699; /* Bordes en un verde más intenso */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);
+    text-align: center; /* Centrar el texto */
+}
+
+h2 {
+    color: #006600; /* Verde más oscuro para los títulos */
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    margin-top: 10px;
+    color: #004d00; /* Verde oscuro para el texto de las etiquetas */
+}
+
+input {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #66cc66;
+}
+
+button {
+    background-color: #66cc66; /* Botones con un verde claro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #55aa55; /* Efecto hover en verde más oscuro */
+}

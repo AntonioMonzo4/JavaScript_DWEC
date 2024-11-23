@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const contentDiv = document.getElementById('content');
+
+        if (loggedInUser) {
+            const userData = JSON.parse(localStorage.getItem(loggedInUser));
+            contentDiv.innerHTML = `
+                <h1>Bienvenido, ${userData.fullname}</h1>
+                <button id="logoutButton">Cerrar Sesión</button>
+                <button id="deleteAccountButton">Borrar Usuario</button>
+            `;
+
+            document.getElementById('logoutButton').addEventListener('click', () => {
+                localStorage.removeItem('loggedInUser');
+                alert('Sesión cerrada.');
+                window.location.href = 'login.html';
+            });
+
+            document.getElementById('deleteAccountButton').addEventListener('click', () => {
+                localStorage.removeItem(loggedInUser);
+                localStorage.removeItem('loggedInUser');
+                alert('Usuario eliminado.');
+                window.location.href = 'login.html';
+            });
+        } else {
+            contentDiv.innerHTML = `
+                <h1>No estás logueado.</h1>
+                <p>Por favor, <a href="login.html">inicia sesión</a>.</p>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="script.js"></script>
+    <script type="module" src="clases.js"></script>
+
+
+</head>
+<body>
+	<h1>Listado de productos</h1>
+	<p>Productos en la cesta: <span id="n_articulos">0</span></p>
+	<button onclick="location.href='carrito.html'">Ver carrito de la compra</button>
+    <main>
+        <article id="articulo1">
+            <img src="images/gt-2000_12black.jpg" alt="Running GT-2000 12" title="GT-2000 12">
+            <div class="datos-productos">
+                <div class="colores-fav">
+					<label for="color1">Colores:</label>
+                    <select name="color1" id="color1">
+						<option value="negro">Negro</option>
+						<option value="azul">Azul</option>
+						<option value="blanco">Blanco</option>
+					</select>
+                </div>
+                <img src="images/fav.jpg" alt="Añadir a favoritos" title="Añadir a favoritos">
+                <div id="modelo1" class="modelo">GT-2000 12</div>
+                <div id="descripcion1" class="descripcion">Zapatillas De Hombre</div>
+                <div id="precio1" class="precio">€ 160,00</div>
+				<button onclick="cesta(1)">Añadir a la cesta</button>
+            </div>
+
+        </article>
+        <article id="articulo2">
+            <img src="images/gt-2000_12Lite.jpg" alt="Running GT-2000 12 LITE SHOW" title="GT2000 12 LITE SHOW ">
+            <div class="datos-productos">
+                <div class="colores-fav">
+					<label for="color2">Colores:</label>
+					<select name="color2" id="color2">
+						<option value="negro">Negro/Rosa</option>
+					</select>
+                </div>
+                <img src="images/fav.jpg" alt="Añadir a favoritos" title="Añadir a favoritos">
+                <div id="modelo2" class="modelo">GT-2000 12 Lite</div>
+                <div id="descripcion2" class="descripcion">Zapatillas De Mujer</div>
+                <div id="precio2" class="precio">€ 140,00</div>
+				<button onclick="cesta(2)">Añadir a la cesta</button>
+            </div>
+        </article>
+        <article id="articulo3">
+            <img src="images/gt-2000_12blue.jpg" alt="Running GT-2000 12" title="GT-2000 12">
+            <div class="datos-productos">
+                <div class="colores-fav">
+					<label for="color3">Colores:</label>
+                    <select name="color3" id="color3">
+						<option value="cian">Cian</option>
+						<option value="rojo">Rojo</option>
+						<option value="morado">Morado</option>
+						<option value="dorado">Dorado</option>
+					</select>
+                </div>
+                <img src="images/fav.jpg" alt="Añadir a favoritos" title="Añadir a favoritos">
+                <div id="modelo3" class="modelo">GT-2000 11</div>
+                <div id="descripcion3" class="descripcion">Zapatillas De Hombre</div>
+                <div id="precio3" class="precio">€ 130,00</div>
+				<button onclick="cesta(3)">Añadir a la cesta</button>
+            </div>
+        </article>
+        <article id="articulo4">
+            <img src="images/1014A311_800_SR_RT_GLB.webp" alt="Running Noosa Kids" title="GEL-NOOSA TRI 15 GS">
+            <div class="datos-productos">
+                <div class="colores-fav">
+                    <label for="color4">Colores:</label>
+                    <select name="color4" id="color4">
+						<option value="naranja">Naranja</option>
+						<option value="rosa">Rosa</option>
+						<option value="amarillo">Amarillo</option>
+					</select>
+                </div>
+                <img src="images/fav.jpg" alt="Añadir a favoritos" title="Añadir a favoritos">
+                <div id="modelo4" class="modelo">GEL-NOOSA TRI 15 GS</div>
+                <div id="descripcion4" class="descripcion">Zapatillas De Niño</div>
+                <div id="precio4" class="precio">€ 70,00</div>
+				<button onclick="cesta(4)">Añadir a la cesta</button>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

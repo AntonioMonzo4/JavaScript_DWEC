@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+/*
+No funciona en Edge / IE
+*/
+function incrementar() {
+  let c = localStorage.getItem("contador");
+  if (c!=null) {
+	c=parseInt(c);
+	c++;
+  } else {
+    c=1;
+  }
+  localStorage.setItem("contador",c);
+}
+
+function mostrar() {
+  let c = localStorage.getItem("contador");
+  if (c!=null) {
+    alert(c);
+  } else {
+     alert("Vacío");
+  }
+}
+
+function reset() {
+  localStorage.removeItem("contador");
+}
+</script>
+</head>
+<body>
+	<h1>Contador Local Storage</h1>
+	<button onclick="incrementar()"><label>Incrementar</label></button>
+	<button onclick="mostrar()"><label>Mostrar</label></button>
+	<button onclick="reset()"><label>Reset</label></button>
+</body>
+</html>

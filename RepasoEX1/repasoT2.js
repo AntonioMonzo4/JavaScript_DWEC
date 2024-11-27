@@ -240,9 +240,9 @@ nombreF(x, y); //llamada
 
 //FUNCIONES FLECHA
 
-(par1,par2)=>{alert("Algo")};
-()=>{alert("Algo")}; //anónimas 
-parametro=>sentencia;
+(par1, par2) => { alert("Algo") };
+() => { alert("Algo") }; //anónimas 
+parametro => sentencia;
 
 
 //PRESENTACIÓN

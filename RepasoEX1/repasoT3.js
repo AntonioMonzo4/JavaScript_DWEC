@@ -115,6 +115,7 @@ console.log("Mes UTC (0-11):", fecha.getUTCMonth());  // Ejemplo: 10
 console.log("Día UTC (1-31):", fecha.getUTCDate());   // Ejemplo: 23
 console.log("Hora UTC (0-23):", fecha.getUTCHours()); // Ejemplo: 15
 
+
 // **2. Métodos para establecer información de la fecha**
 const fecha2 = new Date();
 fecha2.setFullYear(2025);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cálculo de DNIs</title>
+</head>
+<body>
+    <p>Presiona una tecla para calcular DNIs con su letra.</p>
+    <p id="resultados"></p>
+
+    <script>
+        const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+        document.addEventListener('keydown', (event) => {
+            const letra = event.key.toUpperCase();
+            let resultados = '';
+
+            if (letras.includes(letra)) {
+                for (let i = 1; i <= 9999; i++) {
+                    if (letras[i % 23] === letra) {
+                        resultados += `${String(i).padStart(4, '0')}${letra} `;
+                    }
+                }
+                document.getElementById('resultados').textContent = resultados;
+            } else {
+                alert('La tecla no corresponde a una letra válida.');
+            }
+        });
+    </script>
+</body>
+</html>

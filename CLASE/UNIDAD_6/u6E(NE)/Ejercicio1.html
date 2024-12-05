@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Posición del Ratón</title>
+</head>
+<body>
+    <p id="position">Mueve el ratón para ver la posición</p>
+    <script>
+        document.addEventListener('mousemove', (event) => {
+            const position = `X: ${event.clientX}, Y: ${event.clientY}`;
+            document.getElementById('position').textContent = position;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Papelera Interactiva</title>
+    <style>
+        #papelera {
+            width: 100px;
+            height: 100px;
+        }
+        #bola {
+            width: 50px;
+            height: 50px;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <img id="papelera" src="papelera_vacia.png" alt="Papelera vacía">
+    <img id="bola" src="bola_papel.png" alt="Bola de papel" draggable="true">
+
+    <script>
+        const bola = document.getElementById('bola');
+        const papelera = document.getElementById('papelera');
+
+        bola.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text', 'bola');
+        });
+
+        papelera.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        papelera.addEventListener('drop', () => {
+            papelera.src = 'papelera_llena.png';
+        });
+    </script>
+</body>
+</html>

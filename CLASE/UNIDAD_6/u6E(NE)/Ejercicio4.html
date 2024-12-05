@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Aleatorio</title>
+</head>
+<body>
+    <script>
+        document.addEventListener('dblclick', () => {
+            const colorAleatorio = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+            document.body.style.backgroundColor = colorAleatorio;
+        });
+    </script>
+</body>
+</html>

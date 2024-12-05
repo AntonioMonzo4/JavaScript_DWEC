@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Saludos Temporizados</title>
+</head>
+<body>
+    <button id="start">Comenzar Saludos</button>
+    <button id="stop">Parar Saludos</button>
+
+    <script>
+        let intervalId;
+
+        document.getElementById('start').addEventListener('click', () => {
+            if (!intervalId) {
+                intervalId = setInterval(() => {
+                    alert('Hola');
+                }, 5000);
+            }
+        });
+
+        document.getElementById('stop').addEventListener('click', () => {
+            clearInterval(intervalId);
+            intervalId = null;
+        });
+    </script>
+</body>
+</html>

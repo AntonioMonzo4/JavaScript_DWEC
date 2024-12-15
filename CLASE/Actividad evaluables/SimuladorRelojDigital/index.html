@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulador Casio</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="divBackground">
+    <div id="divH">00</div>
+    <div id="divDots">:</div>
+    <div id="divM">00</div>
+    <div id="divS">00</div>
+    <div id="divD">01</div>
+    <div id="divW">MON</div>
+    <div id="divAMPM"></div>
+    <div id="div24h">24H</div>
+    <div id="divLED"></div>
+    <div id="divAlarm"></div>
+    <div id="divSignal"></div>
+    <div id="butMode"></div>
+    <div id="butSet"></div>
+    <div id="butLight"></div>
+</div>
+<script>
+// Variables globales
+let is24HourFormat = true;
+let currentMode = 0; // 0: reloj, 1: cronómetro, 2: alarma
+let lightOn = false;
+let isChronometerRunning = false;
+let chronometerTime = 0; // Cronómetro en segundos
+let chronometerInterval;
+
+// Elementos del DOM
+const divH = document.getElementById("divH");
+const divM = document.getElementById("divM");
+const divS = document.getElementById("divS");
+const divD = document.getElementById("divD");
+const divW = document.getElementById("divW");
+const divAMPM = document.getElementById("divAMPM");
+const div24h = document.getElementById("div24h");
+const divLED = document.getElementById("divLED");
+const butMode = document.getElementById("butMode");
+const butSet = document.getElementById("butSet");
+const butLight = document.getElementById("butLight");
+
+// Actualiza la pantalla con la hora actual
+function updateClock() {
+    if (currentMode !== 0) return; // Solo actualiza en modo reloj
+
+    const now = new Date();
+    const hours = is24HourFormat ? now.getHours() : now.getHours() % 12 || 12;
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const day = now.getDate();
+    const weekday = now.toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
+
+    divH.textContent = hours.toString().padStart(2, '0');
+    divM.textContent = minutes.toString().padStart(2, '0');
+    divS.textContent = seconds.toString().padStart(2, '0');
+    divD.textContent = day.toString().padStart(2, '0');
+    divW.textContent = weekday;
+
+    if (!is24HourFormat) {
+        divAMPM.textContent = now.getHours() >= 12 ? 'PM' : 'AM';
+        div24h.textContent = '';
+    } else {
+        divAMPM.textContent = '';
+        div24h.textContent = '24H';
+    }
+}
+
+// Cambia entre formato de 12 y 24 horas
+function toggleHourFormat() {
+    if (currentMode === 0) {
+        is24HourFormat = !is24HourFormat;
+        updateClock();
+    }
+}
+
+// Cambia entre modos: reloj, cronómetro, alarma
+function toggleMode() {
+    currentMode = (currentMode + 1) % 3;
+
+    switch (currentMode) {
+        case 0: // Reloj
+            clearInterval(chronometerInterval);
+            updateClock();
+            break;
+        case 1: // Cronómetro
+            clearInterval(chronometerInterval);
+            isChronometerRunning = false;
+            chronometerTime = 0;
+            updateChronometerDisplay();
+            break;
+        case 2: // Alarma
+            clearInterval(chronometerInterval);
+            divH.textContent = "AL";
+            divM.textContent = "AR";
+            divS.textContent = "MA";
+            break;
+    }
+}
+
+// Actualiza la pantalla del cronómetro
+function updateChronometerDisplay() {
+    const hours = Math.floor(chronometerTime / 3600);
+    const minutes = Math.floor((chronometerTime % 3600) / 60);
+    const seconds = chronometerTime % 60;
+
+    divH.textContent = hours.toString().padStart(2, '0');
+    divM.textContent = minutes.toString().padStart(2, '0');
+    divS.textContent = seconds.toString().padStart(2, '0');
+}
+
+// Inicia o detiene el cronómetro
+function toggleChronometer() {
+    if (currentMode !== 1) return; // Solo funciona en modo cronómetro
+
+    if (isChronometerRunning) {
+        clearInterval(chronometerInterval);
+        isChronometerRunning = false;
+    } else {
+        chronometerInterval = setInterval(() => {
+            chronometerTime++;
+            updateChronometerDisplay();
+        }, 1000);
+        isChronometerRunning = true;
+    }
+}
+
+// Enciende o apaga la luz del reloj
+function toggleLight(state) {
+    lightOn = state;
+    divLED.style.opacity = lightOn ? "1" : "0";
+}
+
+// Asigna los eventos a los botones
+butMode.addEventListener("click", toggleMode);
+butSet.addEventListener("click", () => {
+    if (currentMode === 1) {
+        toggleChronometer();
+    } else {
+        toggleHourFormat();
+    }
+});
+butLight.addEventListener("mousedown", () => toggleLight(true));
+butLight.addEventListener("mouseup", () => toggleLight(false));
+
+// Inicializa la pantalla
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>

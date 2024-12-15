@@ -1,0 +1,191 @@
+@font-face
+{
+	font-family: 'digital';
+	src: url('../font/digital.eot');
+	src: local('☺'), url('../font/digital.woff') format('woff'), url('../font/digital.ttf') format('truetype'), url('../font/digital.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+#divBackground
+{
+	position:absolute;
+	left: 0px;
+	top: 0px;
+	width: 352px;
+	height: 640px;
+	background-image:url('../img/background.jpg');
+	background-repeat: no-repeat;
+}
+
+
+#divH
+{
+	position:absolute;
+	left: 88px;
+	top: 289px;
+	width: 64px;
+	font-family:'digital';
+	font-size: 56px;
+	text-align: right;
+}
+
+
+#divDots
+{
+	position:absolute;
+	left: 153px;
+	top: 283px;
+	width: 10px;
+	font-family:'digital';
+	font-size: 56px;
+}
+
+
+
+#divM
+{
+	position:absolute;
+	left: 158px;
+	top: 289px;
+	width: 60px;
+	font-family:'digital';
+	font-size: 56px;
+	text-align: right;
+}
+
+
+#divD
+{
+	position:absolute;
+	left: 230px;
+	top: 262px;
+	width: 20px;
+	height: 20px;
+	font-family:'digital';
+	font-size: 28px;
+	text-align: right;
+}
+
+
+#divW
+{
+	position:absolute;
+	left: 160px;
+	top: 263px;
+	width: 20px;
+	height: 20px;
+	font-family:'digital';
+	font-size: 28px;
+	text-align: right;
+}
+
+
+#divS
+{
+	position:absolute;
+	left: 222px;
+	top: 307px;
+	font-family:'digital';
+	font-size: 36px;
+	text-align: right;
+}
+
+
+#divAlarm
+{
+	position:absolute;
+	left: 97px;
+	top: 269px;
+	width: 18px;
+	height: 9px;
+	background-image:url('../img/alarm.png');
+	background-repeat: no-repeat;
+}
+
+
+#divSignal
+{
+	position:absolute;
+	left: 120px;
+	top: 269px;
+	width: 8px;
+	height: 10px;
+	background-image:url('../img/signal.png');
+	background-repeat: no-repeat;
+}
+
+
+#divAMPM
+{
+	position:absolute;
+	left: 96px;
+	top: 280px;
+	width: 20px;
+	height: 20px;
+	font-family:'digital';
+	font-size: 14px;
+}
+
+
+#div24h
+{
+	position:absolute;
+	left: 120px;
+	top: 280px;
+	width: 20px;
+	height: 20px;
+	font-family:'digital';
+	font-size: 14px;
+}
+
+
+#divLED
+{
+	position:absolute;
+	left: 88px;
+	top: 264px;
+	width: 176px;
+	height: 85px;
+	background-color: #FFFF40;
+	filter: alpha(opacity=0);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	-webkit-opacity: 0;
+	-moz-opacity: 0;
+	-o-opacity: 0;
+	-khtml-opacity: 0;
+	opacity: 0;
+}
+
+#butMode
+{
+	cursor: pointer;
+	position:absolute;
+	left: 10px;
+	top: 330px;
+	width: 30px;
+	height: 30px;
+}
+
+
+#butSet
+{
+	cursor: pointer;
+	position:absolute;
+	left: 330px;
+	top: 330px;
+	width: 30px;
+	height: 30px;
+}
+
+
+#butLight
+{
+	cursor: pointer;
+	position:absolute;
+	left: 10px;
+	top: 250px;
+	width: 30px;
+	height: 30px;
+}

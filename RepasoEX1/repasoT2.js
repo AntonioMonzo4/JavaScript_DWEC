@@ -15,7 +15,7 @@ alert("Hola Mundo");//Sale en forma de ventana
 
 //Las variables pueden almacenar distints valores en cada momento las declaramos con let o var
 
-let variable1; //Solo se puede acceder a ella dentro del bloque declarado {}
+let variable1; //Solo se puede acceder a ella dentro del bloque declarado {} MEJOR
 var variable2; //En cualquier parte de la función donde ha sido declarada, si esta ha sido declara fuera de una función el ámbito es todo el código
 
 //Si no se declara equivale a todo el código

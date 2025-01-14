@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN PRUEBA</title>
+    <script src="reloj.js"></script>
+    <script src="empresa.js"></script>
+    <script src="work.js"></script>
+    <script src="cliente.js"></script>
+</head>
+
+<body>
+
+    <!-- EJERCICIO 2 -->
+    <div id="reloj"> 00:00:00</div>
+    <div id="crono"> 00:00:00</div>
+
+    <button onclick="iniciarC()">INICIAR</button>
+    <button onclick="pausar()">PARAR</button>
+    <button onclick="reiniciar()">REINICIAR</button>
+
+    <br><br><br>
+
+    <!-- EJERCICIO 3 -->
+
+    <form action="#">
+        <label for="nombre">nombre</label>
+        <input type="text" name="nombre" id="nombre" required>
+        <br>
+
+        <label for="apellido">apellido</label>
+        <input type="text" name="apellido" id="apellido" required>
+        <br>
+        <label for="fecha">fecha nacimiento(/)</label>
+        <input type="text" name="fecha" id="fecha" required>
+        <br>
+        <label for="work">work o cliente</label>
+        <input type="text" name="work" id="work" required>
+    </form>
+
+    <button onclick="empresa.aPersona()">Añadir</button>
+
+    <br><br><br>
+
+
+    <button onclick="cargarClientes()">CARGAR CLIENTES</button>
+    <button onclick="cargarWork()">CARGAR TRABAJADORES</button>
+
+    <div id="listaC">Aquí se muestra la lista de clientes.</div>
+
+    <br><br><br><br>
+
+    <div id="listaW">Aquí se muestra la lista de tranajadores.</div>
+</body>
+
+<script>
+    setInterval(actualizarR,1000);
+    actualizarC();
+
+    const empresa = new Empresa();
+
+    // Exponer métodos globalmente
+    function cargarClientes() {
+        empresa.cargarClientes();
+    }
+
+    function cargarWork() {
+        empresa.cargarWork();
+    }
+</script>
+</html>

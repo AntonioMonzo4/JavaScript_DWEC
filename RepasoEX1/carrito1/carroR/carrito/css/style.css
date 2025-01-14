@@ -1,0 +1,161 @@
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+	text-align:center;
+}
+
+main{
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap:wrap;
+
+}
+
+article{
+    flex-basis: 33%;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    padding: 2% 0;
+}
+
+article:hover{
+    box-shadow: 1px 1px 10px grey;
+}
+
+article>img{
+    width: 75%;
+    margin: 0 auto;
+}
+
+.datos-productos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.datos-productos div{
+    margin: 0.3em 0;
+}
+
+.modelo, .precio {
+    color: #182d4a;
+    font-weight: bolder;
+    font-size: large;
+}
+
+article .colores li{
+    display: none;
+}
+article:hover .colores li{
+    display: block;
+}
+
+article .colores li.numero{
+    display: block;
+}
+article:hover .colores li.numero{
+    display: none;
+}
+
+article .colores{
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+
+.prev{
+    background-image: url(../images/left.jpg);
+    background-size:cover
+}
+
+.next{
+    background-image: url(../images/right.jpg);
+    background-size: cover;
+}
+.colores li{
+    width: 1.2em;
+    height: 1.2em;
+    margin: 0.3em;
+    
+}
+
+.colores li.numero, .descripcion{
+    color: grey;
+    text-align: center;
+    width: 100%;
+}
+
+.datos-productos{
+    position: relative;
+}
+.datos-productos img{
+    position: absolute;
+    right: 10%;
+    top:-10%;
+}
+
+.negro{
+    background-color: black;
+    border-radius: 50%;
+}
+
+.azul{
+    background-color: blue;
+        border-radius: 50%;
+
+}
+
+.verde{
+    background-color: green;
+        border-radius: 50%;
+
+}
+
+.rojo{
+    background-color: red;
+        border-radius: 50%;
+
+}
+
+.cian{
+    background-color: cyan;
+    border-radius: 50%;
+}
+
+.morado{
+    background-color:mediumvioletred;
+    border-radius: 50%;
+}
+
+.amarillo{
+    background-color:yellow;
+    border-radius: 50%;
+}
+
+.dorado{
+    background-color: gold;
+    border-radius: 50%;
+}
+
+.negro-rosa{
+    background:linear-gradient(135deg, black 50%, pink 50%) ;
+    border-radius:50%;
+}
+
+
+@media only screen and (max-width: 600px) {
+    main{
+        flex-direction: column;
+        align-content: center;
+    }
+
+    article{
+        flex-basis: 100%;
+      }
+  }
+  

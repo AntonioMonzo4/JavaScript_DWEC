@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .validacion {
+            margin-bottom: 20px;
+        }
+        .resultado {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .resultado img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Validaciones</h1>
+
+    <!-- Validación de Fecha y Hora -->
+    <div class="validacion">
+        <p>Fecha y hora de creación (formato: dd/mm/aaaa hh:mm):</p>
+        <input type="text" id="fechaHora" placeholder="Ej. 21/01/2025 14:30">
+        <button onclick="validarFechaHora()">Validar</button>
+        <div id="resultadoFechaHora" class="resultado"></div>
+    </div>
+
+    <!-- Validación de Remitente -->
+    <div class="validacion">
+        <p>Remitente (formato: AA$1234):</p>
+        <input type="text" id="remitente" placeholder="Ej. WW$1234">
+        <button onclick="validarRemitente()">Validar</button>
+        <div id="resultadoRemitente" class="resultado"></div>
+    </div>
+
+    <!-- Validación de Destinatario -->
+    <div class="validacion">
+        <p>Destinatario (formato: CM_galapagar:28260):</p>
+        <input type="text" id="destinatario" placeholder="Ej. CM_galapagar:28260">
+        <button onclick="validarDestinatario()">Validar</button>
+        <div id="resultadoDestinatario" class="resultado"></div>
+    </div>
+
+    <!-- Validación de Gramos -->
+    <div class="validacion">
+        <p>Gramos (número entre 1000 y 5000):</p>
+        <input type="text" id="gramos" placeholder="Ej. 2000">
+        <button onclick="validarGramos()">Validar</button>
+        <div id="resultadoGramos" class="resultado"></div>
+    </div>
+
+    <!-- Validación de Composición -->
+    <div class="validacion">
+        <p>Composición (ej. 200gC3OH7):</p>
+        <input type="text" id="composicion" placeholder="Ej. 200gC3OH7">
+        <button onclick="validarComposicion()">Validar</button>
+        <div id="resultadoComposicion" class="resultado"></div>
+    </div>
+
+    <script>
+        // Expresiones regulares
+        const regexFechaHora = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4} (\d{2}):([0-5][0-9])$/;
+        const regexRemitente = /^[A-Z]{2}\$\d{4}$/;
+        const regexDestinatario = /^[A-Z]{2,3}_[a-z]+:\d{5}$/;
+        const regexGramos = /^(1000|[12][0-9]{3}|3000|4000|5000)$/;
+        const regexComposicion = /^\d+g([A-Za-z]{1,2}\d{0,1}){2}$/;
+
+        // Funciones de validación
+        function validarFechaHora() {
+            const fechaHora = document.getElementById("fechaHora").value;
+            const resultado = document.getElementById("resultadoFechaHora");
+            if (regexFechaHora.test(fechaHora)) {
+                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
+            } else {
+                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+            }
+        }
+
+        function validarRemitente() {
+            const remitente = document.getElementById("remitente").value;
+            const resultado = document.getElementById("resultadoRemitente");
+            if (regexRemitente.test(remitente)) {
+                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
+            } else {
+                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+            }
+        }
+
+        function validarDestinatario() {
+            const destinatario = document.getElementById("destinatario").value;
+            const resultado = document.getElementById("resultadoDestinatario");
+            if (regexDestinatario.test(destinatario)) {
+                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
+            } else {
+                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+            }
+        }
+
+        function validarGramos() {
+            const gramos = document.getElementById("gramos").value;
+            const resultado = document.getElementById("resultadoGramos");
+            if (regexGramos.test(gramos)) {
+                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
+            } else {
+                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+            }
+        }
+
+        function validarComposicion() {
+            const composicion = document.getElementById("composicion").value;
+            const resultado = document.getElementById("resultadoComposicion");
+            if (regexComposicion.test(composicion)) {
+                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
+            } else {
+                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+            }
+        }
+    </script>
+
+</body>
+</html>

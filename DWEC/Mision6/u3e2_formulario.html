@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        input[type="checkbox"] {
+            width: auto;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+        input.error, select.error {
+            border: 2px solid red;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Formulario de Registro</h1>
+    <form id="formulario" onsubmit="return validarFormulario(event)">
+        <!-- Identificador -->
+        <label for="identificador">Identificador (1 letra, 8 cifras, 1 letra):</label>
+        <input type="text" id="identificador" name="identificador" required>
+        <div id="errorIdentificador" class="error">Debe ser 1 letra, 8 cifras y 1 letra.</div>
+
+        <!-- Nombre y apellidos -->
+        <label for="nombre">Nombre y apellidos (máximo 50 caracteres):</label>
+        <input type="text" id="nombre" name="nombre" maxlength="50" required>
+        <div id="errorNombre" class="error">Este campo es obligatorio.</div>
+
+        <!-- Fecha de nacimiento -->
+        <label for="fechaNacimiento">Fecha de nacimiento (dd/mm/yyyy):</label>
+        <input type="text" id="fechaNacimiento" name="fechaNacimiento" required>
+        <div id="errorFechaNacimiento" class="error">Debe ser en formato dd/mm/yyyy.</div>
+
+        <!-- Correo electrónico -->
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" maxlength="20" required>
+        <div id="errorCorreo" class="error">Correo electrónico no válido.</div>
+
+        <!-- Teléfono -->
+        <label for="telefono">Teléfono (+xx-xxxxxxxxx):</label>
+        <input type="text" id="telefono" name="telefono" required>
+        <div id="errorTelefono" class="error">Formato de teléfono no válido.</div>
+
+        <!-- Edad -->
+        <label for="edad">Edad:</label>
+        <select id="edad" name="edad" required>
+            <option value="">Seleccione una opción</option>
+            <option value="niño">Niño</option>
+            <option value="adulto">Adulto</option>
+            <option value="jubilado">Jubilado</option>
+        </select>
+        <div id="errorEdad" class="error">Este campo es obligatorio.</div>
+
+        <!-- Club de Ski -->
+        <label for="clubSki">
+            <input type="checkbox" id="clubSki" name="clubSki"> Club de Ski
+        </label>
+
+        <div id="camposClubSki" class="hidden">
+            <!-- Número de socio -->
+            <label for="numeroSocio">Número de socio (10000-99999):</label>
+            <input type="number" id="numeroSocio" name="numeroSocio">
+            <div id="errorNumeroSocio" class="error">Debe ser un número de 5 cifras entre 10000 y 99999.</div>
+
+            <!-- Categoría -->
+            <label>Categoría:</label>
+            <label><input type="radio" name="categoria" value="infantil"> Infantil</label>
+            <label><input type="radio" name="categoria" value="juvenil"> Juvenil</label>
+            <label><input type="radio" name="categoria" value="senior"> Senior</label>
+            <div id="errorCategoria" class="error">Debe seleccionar una categoría.</div>
+        </div>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        // Expresiones regulares para validaciones
+        const regexIdentificador = /^[A-Za-z]\d{8}[A-Za-z]$/;
+        const regexFechaNacimiento = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+        const regexCorreo = /^[a-zA-Z0-9._-]+@[a-zA-Z]{1,20}\.[a-zA-Z]{2,3}$/;
+        const regexTelefono = /^\+\d{2,3}-\d{9}$/;
+        const regexNumeroSocio = /^(10000|[1-9][0-9]{4})$/;
+
+        // Función de validación
+        function validarFormulario(event) {
+            let esValido = true;
+
+            // Limpiar los errores previos
+            limpiarErrores();
+
+            // Validar identificador
+            const identificador = document.getElementById('identificador');
+            if (!regexIdentificador.test(identificador.value)) {
+                mostrarError(identificador, 'errorIdentificador');
+                esValido = false;
+            }
+
+            // Validar nombre y apellidos
+            const nombre = document.getElementById('nombre');
+            if (nombre.value.trim() === '') {
+                mostrarError(nombre, 'errorNombre');
+                esValido = false;
+            }
+
+            // Validar fecha de nacimiento
+            const fechaNacimiento = document.getElementById('fechaNacimiento');
+            if (!regexFechaNacimiento.test(fechaNacimiento.value)) {
+                mostrarError(fechaNacimiento, 'errorFechaNacimiento');
+                esValido = false;
+            }
+
+            // Validar correo electrónico
+            const correo = document.getElementById('correo');
+            if (!regexCorreo.test(correo.value)) {
+                mostrarError(correo, 'errorCorreo');
+                esValido = false;
+            }
+
+            // Validar teléfono
+            const telefono = document.getElementById('telefono');
+            if (!regexTelefono.test(telefono.value)) {
+                mostrarError(telefono, 'errorTelefono');
+                esValido = false;
+            }
+
+            // Validar edad
+            const edad = document.getElementById('edad');
+            if (edad.value === '') {
+                mostrarError(edad, 'errorEdad');
+                esValido = false;
+            }
+
+            // Validar campos del club de ski si está marcado
+            const clubSki = document.getElementById('clubSki');
+            if (clubSki.checked) {
+                const numeroSocio = document.getElementById('numeroSocio');
+                if (!regexNumeroSocio.test(numeroSocio.value)) {
+                    mostrarError(numeroSocio, 'errorNumeroSocio');
+                    esValido = false;
+                }
+
+                const categoria = document.querySelector('input[name="categoria"]:checked');
+                if (!categoria) {
+                    mostrarError(document.querySelector('[name="categoria"]'), 'errorCategoria');
+                    esValido = false;
+                }
+            }
+
+            return esValido;
+        }
+
+        // Función para mostrar los errores
+        function mostrarError(input, idError) {
+            input.classList.add('error');
+            document.getElementById(idError).style.display = 'block';
+        }
+
+        // Función para limpiar los errores
+        function limpiarErrores() {
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.classList.remove('error');
+                const errorDiv = document.getElementById('error' + input.id.charAt(0).toUpperCase() + input.id.slice(1));
+                if (errorDiv) {
+                    errorDiv.style.display = 'none';
+                }
+            });
+        }
+
+        // Mostrar/ocultar campos del Club de Ski
+        document.getElementById('clubSki').addEventListener('change', function() {
+            const camposClubSki = document.getElementById('camposClubSki');
+            if (this.checked) {
+                camposClubSki.classList.remove('hidden');
+            } else {
+                camposClubSki.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>

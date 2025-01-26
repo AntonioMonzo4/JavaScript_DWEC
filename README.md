@@ -1,5 +1,63 @@
-### El repositorio "JAVASCRIPT" de AntonioMonzo4 está estructurado en tres carpetas principales:
+# JavaScript DWEC
 
-## Básico: Incluye ejemplos de programación básica en JavaScript.
-## Clase: Contiene material de clase, ejercicios y temas específicos relacionados con el desarrollo web en entorno cliente.
-## DWEC: Incluye prácticas y proyectos para la asignatura Desarrollo Web en Entorno Cliente, con archivos HTML, CSS y JavaScript para diferentes ejercicios.
+Bienvenido al repositorio **JavaScript DWEC**. Este proyecto contiene ejercicios, prácticas y recursos relacionados con el desarrollo en JavaScript para el módulo de Desarrollo Web en Entorno Cliente (DWEC).
+
+## Contenido del Repositorio
+
+### 📁 Estructura del Proyecto
+
+- **`practicas/`**: Contiene ejercicios prácticos relacionados con conceptos clave de JavaScript.
+- **`actividades/`**: Actividades evaluables y retos propuestos en el curso.
+- **`recursos/`**: Recursos complementarios como documentación, ejemplos y scripts.
+
+### 📄 Principales Archivos
+
+- **`index.html`**: Punto de entrada para probar la mayoría de los scripts del proyecto.
+- **`scripts.js`**: Archivo JavaScript principal con ejemplos y soluciones.
+- **`README.md`**: Información sobre el proyecto (este archivo).
+
+## Instalación y Uso
+
+### 🛠️ Requisitos
+
+- Navegador moderno (Google Chrome, Firefox, Edge, etc.)
+- Editor de texto recomendado: [Visual Studio Code](https://code.visualstudio.com/)
+
+### 🚀 Instrucciones
+
+1. Clona este repositorio en tu máquina local:
+
+   ```bash
+   git clone https://github.com/AntonioMonzo4/JavaScript_DWEC.git
+   ```
+
+2. Abre el archivo `index.html` en tu navegador para probar los ejemplos y ejercicios.
+3. Edita los archivos en el directorio `scripts/` para practicar y experimentar con el código.
+
+## Ejercicios Destacados
+
+- **Manipulación del DOM**: Ejercicios para entender cómo acceder y modificar elementos del DOM con JavaScript.
+- **Eventos**: Prácticas relacionadas con el manejo de eventos en páginas web.
+- **Validación de Formularios**: Validación de datos usando JavaScript.
+- **Expresiones Regulares**: Uso de regex para validar patrones comunes.
+
+## Contribuciones
+
+¡Las contribuciones son bienvenidas! Si tienes alguna sugerencia o mejora, por favor:
+
+1. Realiza un fork de este repositorio.
+2. Crea una nueva rama para tus cambios:
+
+   ```bash
+   git checkout -b mejora-feature
+   ```
+
+3. Realiza un pull request describiendo tus cambios.
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más información.
+
+---
+
+¡Gracias por visitar este repositorio! 😊 No dudes en ponerte en contacto si tienes preguntas o necesitas ayuda.

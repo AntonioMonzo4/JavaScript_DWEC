@@ -18,9 +18,10 @@
             margin-top: 10px;
         }
         input, select {
-            width: 100%;
+            width: calc(100% - 22px);
             padding: 8px;
             margin-top: 5px;
+            display: inline-block;
         }
         input[type="checkbox"] {
             width: auto;
@@ -28,7 +29,9 @@
         .error {
             color: red;
             font-size: 12px;
-            display: none;
+            margin-left: 10px;
+            display: inline-block;
+            vertical-align: middle;
         }
         input.error, select.error {
             border: 2px solid red;
@@ -44,38 +47,50 @@
     <form id="formulario" onsubmit="return validarFormulario(event)">
         <!-- Identificador -->
         <label for="identificador">Identificador (1 letra, 8 cifras, 1 letra):</label>
-        <input type="text" id="identificador" name="identificador" required>
-        <div id="errorIdentificador" class="error">Debe ser 1 letra, 8 cifras y 1 letra.</div>
+        <div>
+            <input type="text" id="identificador" name="identificador" required>
+            <span id="errorIdentificador" class="error hidden">Debe ser 1 letra, 8 cifras y 1 letra.</span>
+        </div>
 
         <!-- Nombre y apellidos -->
         <label for="nombre">Nombre y apellidos (máximo 50 caracteres):</label>
-        <input type="text" id="nombre" name="nombre" maxlength="50" required>
-        <div id="errorNombre" class="error">Este campo es obligatorio.</div>
+        <div>
+            <input type="text" id="nombre" name="nombre" maxlength="50" required>
+            <span id="errorNombre" class="error hidden">Este campo es obligatorio.</span>
+        </div>
 
         <!-- Fecha de nacimiento -->
         <label for="fechaNacimiento">Fecha de nacimiento (dd/mm/yyyy):</label>
-        <input type="text" id="fechaNacimiento" name="fechaNacimiento" required>
-        <div id="errorFechaNacimiento" class="error">Debe ser en formato dd/mm/yyyy.</div>
+        <div>
+            <input type="text" id="fechaNacimiento" name="fechaNacimiento" required>
+            <span id="errorFechaNacimiento" class="error hidden">Debe ser en formato dd/mm/yyyy.</span>
+        </div>
 
         <!-- Correo electrónico -->
         <label for="correo">Correo electrónico:</label>
-        <input type="email" id="correo" name="correo" maxlength="20" required>
-        <div id="errorCorreo" class="error">Correo electrónico no válido.</div>
+        <div>
+            <input type="email" id="correo" name="correo" maxlength="50" required>
+            <span id="errorCorreo" class="error hidden">Correo electrónico no válido.</span>
+        </div>
 
         <!-- Teléfono -->
         <label for="telefono">Teléfono (+xx-xxxxxxxxx):</label>
-        <input type="text" id="telefono" name="telefono" required>
-        <div id="errorTelefono" class="error">Formato de teléfono no válido.</div>
+        <div>
+            <input type="text" id="telefono" name="telefono" required>
+            <span id="errorTelefono" class="error hidden">Formato de teléfono no válido.</span>
+        </div>
 
         <!-- Edad -->
         <label for="edad">Edad:</label>
-        <select id="edad" name="edad" required>
-            <option value="">Seleccione una opción</option>
-            <option value="niño">Niño</option>
-            <option value="adulto">Adulto</option>
-            <option value="jubilado">Jubilado</option>
-        </select>
-        <div id="errorEdad" class="error">Este campo es obligatorio.</div>
+        <div>
+            <select id="edad" name="edad" required>
+                <option value="">Seleccione una opción</option>
+                <option value="niño">Niño</option>
+                <option value="adulto">Adulto</option>
+                <option value="jubilado">Jubilado</option>
+            </select>
+            <span id="errorEdad" class="error hidden">Este campo es obligatorio.</span>
+        </div>
 
         <!-- Club de Ski -->
         <label for="clubSki">
@@ -85,15 +100,19 @@
         <div id="camposClubSki" class="hidden">
             <!-- Número de socio -->
             <label for="numeroSocio">Número de socio (10000-99999):</label>
-            <input type="number" id="numeroSocio" name="numeroSocio">
-            <div id="errorNumeroSocio" class="error">Debe ser un número de 5 cifras entre 10000 y 99999.</div>
+            <div>
+                <input type="number" id="numeroSocio" name="numeroSocio">
+                <span id="errorNumeroSocio" class="error hidden">Debe ser un número de 5 cifras entre 10000 y 99999.</span>
+            </div>
 
             <!-- Categoría -->
             <label>Categoría:</label>
-            <label><input type="radio" name="categoria" value="infantil"> Infantil</label>
-            <label><input type="radio" name="categoria" value="juvenil"> Juvenil</label>
-            <label><input type="radio" name="categoria" value="senior"> Senior</label>
-            <div id="errorCategoria" class="error">Debe seleccionar una categoría.</div>
+            <div>
+                <label><input type="radio" name="categoria" value="infantil"> Infantil</label>
+                <label><input type="radio" name="categoria" value="juvenil"> Juvenil</label>
+                <label><input type="radio" name="categoria" value="senior"> Senior</label>
+                <span id="errorCategoria" class="error hidden">Debe seleccionar una categoría.</span>
+            </div>
         </div>
 
         <button type="submit">Enviar</button>
@@ -178,7 +197,8 @@
         // Función para mostrar los errores
         function mostrarError(input, idError) {
             input.classList.add('error');
-            document.getElementById(idError).style.display = 'block';
+            const errorElement = document.getElementById(idError);
+            errorElement.classList.remove('hidden');
         }
 
         // Función para limpiar los errores
@@ -188,7 +208,7 @@
                 input.classList.remove('error');
                 const errorDiv = document.getElementById('error' + input.id.charAt(0).toUpperCase() + input.id.slice(1));
                 if (errorDiv) {
-                    errorDiv.style.display = 'none';
+                    errorDiv.classList.add('hidden');
                 }
             });
         }

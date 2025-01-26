@@ -40,7 +40,7 @@
     <div class="validacion">
         <p>Remitente (formato: AA$1234):</p>
         <input type="text" id="remitente" placeholder="Ej. WW$1234">
-        <button onclick="validarRemitente()">Validar</button>
+        <button onclick="validar('remitente', regexRemitente)">Validar</button>
         <div id="resultadoRemitente" class="resultado"></div>
     </div>
 
@@ -48,7 +48,7 @@
     <div class="validacion">
         <p>Destinatario (formato: CM_galapagar:28260):</p>
         <input type="text" id="destinatario" placeholder="Ej. CM_galapagar:28260">
-        <button onclick="validarDestinatario()">Validar</button>
+        <button onclick="validar('destinatario', regexDestinatario)">Validar</button>
         <div id="resultadoDestinatario" class="resultado"></div>
     </div>
 
@@ -56,7 +56,7 @@
     <div class="validacion">
         <p>Gramos (número entre 1000 y 5000):</p>
         <input type="text" id="gramos" placeholder="Ej. 2000">
-        <button onclick="validarGramos()">Validar</button>
+        <button onclick="validar('gramos', regexGramos)">Validar</button>
         <div id="resultadoGramos" class="resultado"></div>
     </div>
 
@@ -64,63 +64,65 @@
     <div class="validacion">
         <p>Composición (ej. 200gC3OH7):</p>
         <input type="text" id="composicion" placeholder="Ej. 200gC3OH7">
-        <button onclick="validarComposicion()">Validar</button>
+        <button onclick="validar('composicion', regexComposicion)">Validar</button>
         <div id="resultadoComposicion" class="resultado"></div>
     </div>
 
     <script>
         // Expresiones regulares
-        const regexFechaHora = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4} (\d{2}):([0-5][0-9])$/;
         const regexRemitente = /^[A-Z]{2}\$\d{4}$/;
         const regexDestinatario = /^[A-Z]{2,3}_[a-z]+:\d{5}$/;
         const regexGramos = /^(1000|[12][0-9]{3}|3000|4000|5000)$/;
-        const regexComposicion = /^\d+g([A-Za-z]{1,2}\d{0,1}){2}$/;
+        const regexComposicion = /^\d+g([A-Za-z]{1,2}\d?){2}$/;
 
-        // Funciones de validación
+        // Validación de Fecha y Hora
         function validarFechaHora() {
-            const fechaHora = document.getElementById("fechaHora").value;
+            const valor = document.getElementById("fechaHora").value;
             const resultado = document.getElementById("resultadoFechaHora");
-            if (regexFechaHora.test(fechaHora)) {
-                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
-            } else {
+
+            // Verificar formato inicial con expresión regular
+            const regexFechaHora = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4} (\d{2}):([0-5][0-9])$/;
+            if (!regexFechaHora.test(valor)) {
                 resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+                return;
             }
+
+            // Separar componentes de fecha y hora
+            const [fecha, hora] = valor.split(" ");
+            const [dia, mes, anio] = fecha.split("/").map(Number);
+            const [horas, minutos] = hora.split(":").map(Number);
+
+            // Validar rango de horas y minutos
+            if (horas < 0 || horas > 23 || minutos < 0 || minutos > 59) {
+                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+                return;
+            }
+
+            // Validar la fecha
+            const esFechaValida = validarFecha(dia, mes, anio);
+            resultado.innerHTML = esFechaValida ? '<img src="tick.png" alt="Correcto">' : '<img src="cross.png" alt="Incorrecto">';
         }
 
-        function validarRemitente() {
-            const remitente = document.getElementById("remitente").value;
-            const resultado = document.getElementById("resultadoRemitente");
-            if (regexRemitente.test(remitente)) {
-                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
-            } else {
-                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
+        // Función para validar la fecha
+        function validarFecha(dia, mes, anio) {
+            // Meses con días máximos
+            const diasPorMes = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            // Verificar años bisiestos
+            if (mes === 2 && ((anio % 4 === 0 && anio % 100 !== 0) || anio % 400 === 0)) {
+                diasPorMes[1] = 29;
             }
+
+            // Comprobar día válido para el mes
+            return mes >= 1 && mes <= 12 && dia >= 1 && dia <= diasPorMes[mes - 1];
         }
 
-        function validarDestinatario() {
-            const destinatario = document.getElementById("destinatario").value;
-            const resultado = document.getElementById("resultadoDestinatario");
-            if (regexDestinatario.test(destinatario)) {
-                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
-            } else {
-                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
-            }
-        }
+        // Función genérica de validación
+        function validar(campoId, regex) {
+            const valor = document.getElementById(campoId).value;
+            const resultado = document.getElementById(`resultado${campoId.charAt(0).toUpperCase() + campoId.slice(1)}`);
 
-        function validarGramos() {
-            const gramos = document.getElementById("gramos").value;
-            const resultado = document.getElementById("resultadoGramos");
-            if (regexGramos.test(gramos)) {
-                resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
-            } else {
-                resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';
-            }
-        }
-
-        function validarComposicion() {
-            const composicion = document.getElementById("composicion").value;
-            const resultado = document.getElementById("resultadoComposicion");
-            if (regexComposicion.test(composicion)) {
+            if (regex.test(valor)) {
                 resultado.innerHTML = '<img src="tick.png" alt="Correcto">';
             } else {
                 resultado.innerHTML = '<img src="cross.png" alt="Incorrecto">';

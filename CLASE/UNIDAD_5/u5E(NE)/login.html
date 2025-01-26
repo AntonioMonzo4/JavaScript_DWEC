@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form onsubmit="event.preventDefault(); login()">
+        <input id="username" placeholder="Usuario" required><br>
+        <input id="password" placeholder="Contraseña" required><br>
+        <button>Iniciar Sesión</button>
+    </form>
+
+    <script>
+        function login() {
+            var user = localStorage.getItem(document.getElementById("username").value);
+            if (user && JSON.parse(user).password === document.getElementById("password").value) {
+                localStorage.setItem("loggedInUser", document.getElementById("username").value);
+                window.location = "welcome.html";
+            } else {
+                alert("Usuario o contraseña incorrectos");
+            }
+        }
+    </script>
+</body>
+</html>

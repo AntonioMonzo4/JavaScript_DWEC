@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>
+    <h1>Registro</h1>
+    <form onsubmit="event.preventDefault(); registrar()">
+        <input id="username" placeholder="Usuario" required><br>
+        <input id="fullname" placeholder="Nombre completo" required><br>
+        <input id="password" placeholder="Contraseña" required><br>
+        <button>Registrar</button>
+    </form>
+
+    <script>
+        function registrar() {
+            localStorage.setItem(
+                document.getElementById("username").value,
+                JSON.stringify({
+                    fullname: document.getElementById("fullname").value,
+                    password: document.getElementById("password").value
+                })
+            );
+            window.location = "login.html";
+        }
+    </script>
+</body>
+</html>

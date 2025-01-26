@@ -1,25 +1,20 @@
-
 class Producto {
-    constructor(id, modelo, descripcion, precio, color, cantidad) {
+    constructor(id, modelo, descripcion, precio, color) {
         this.id = id;
         this.modelo = modelo;
         this.descripcion = descripcion;
-        this.precio = parseFloat(precio.replace('€', '').trim());
+        this.precio = precio;
         this.color = color;
-        this.cantidad = cantidad || 1;
+        this.cantidad = 1;
     }
 
+    get precioFloat() {
+        let partes = this.precio.split(" ");
+        let precioNum = partes[1];
+        return parseFloat(precioNum.replace(",", "."));
+    }
 
     mostrar() {
-        return (
-            '<div class="producto">' +
-            '<h3>' + this.modelo + ' (' + this.color + ')</h3>' +
-            '<p>' + this.descripcion + '</p>' +
-            '<p>Precio: ' + this.precio + '€</p>' +
-            '<p>Cantidad: ' + this.cantidad + '</p>' +
-            '<p>Total: ' + (this.precio * this.cantidad).toFixed(2) + '€</p>' +
-            '<button onclick="eliminarProducto(' + this.id + ', \'' + this.color + '\')">Eliminar</button>' +
-            '</div>'
-        );
+        return "<tr><td>" + this.modelo + "</td><td>" + this.descripcion + "</td><td>" + this.precio + "</td><td>" + this.color + "</td><td>" + this.cantidad + "</td><td><button onclick=\"borrar(" + this.id + ",'" + this.color + "')\">Eliminar</button></td></tr>";
     }
 }

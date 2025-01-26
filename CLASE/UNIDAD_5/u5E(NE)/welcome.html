@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido</title>
+</head>
+<body>
+    <script>
+        var user = localStorage.getItem("loggedInUser");
+        if (user) {
+            var data = JSON.parse(localStorage.getItem(user));
+            document.body.innerHTML = `
+                <h1>Bienvenido,`+data.fullname+`</h1>
+                <button onclick="logout()">Cerrar Sesión</button>
+                <button onclick="deleteUser()">Borrar Usuario</button>
+            `;
+        } else {
+            document.body.innerHTML = '<h1>No estás logueado</h1><a href="login.html">Inicia sesión</a>';
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location = "login.html";
+        }
+
+        function deleteUser() {
+            localStorage.removeItem(user);
+            logout();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Personajes</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+        }
+        img {
+            width: 250px;
+            height: 350px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.2);
+        }
+        #info-panel {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid black;
+            display: inline-block;
+            background-color: #f9f9f9;
+        }
+        .resaltado {
+            border: 3px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personajes Icónicos de la Ciencia y Tecnología</h1>
+    
+    <div class="container">
+        <table>
+            <tr>
+                <td><img src="tesla.jpg" alt="Nikola Tesla" class="cientifico" onmouseover="mostrarInfo('Nikola Tesla', 'Inventor e ingeniero eléctrico. Desarrolló la corriente alterna.')"></td>
+                <td><img src="turing.jpg" alt="Alan Turing" class="cientifico" onmouseover="mostrarInfo('Alan Turing', 'Matemático y pionero de la computación. Descifró Enigma.')"></td>
+                <td><img src="jobs.jpg" alt="Steve Jobs" class="empresario siglo21" onmouseover="mostrarInfo('Steve Jobs', 'Cofundador de Apple. Revolucionó la industria tecnológica.')"></td>
+                <td><img src="hawking.jpg" alt="Stephen Hawking" class="cientifico siglo21" onmouseover="mostrarInfo('Stephen Hawking', 'Físico teórico. Contribuyó a la cosmología y agujeros negros.')"></td>
+            </tr>
+            <tr>
+                <td><img src="musk.jpg" alt="Elon Musk" class="empresario siglo21" onmouseover="mostrarInfo('Elon Musk', 'CEO de Tesla y SpaceX. Innovador en tecnología aeroespacial.')"></td>
+                <td><img src="gates.jpg" alt="Bill Gates" class="empresario siglo21" onmouseover="mostrarInfo('Bill Gates', 'Cofundador de Microsoft. Impulsor de la computación personal.')"></td>
+                <td><img src="edison.jpg" alt="Thomas Edison" class="cientifico" onmouseover="mostrarInfo('Thomas Edison', 'Inventor. Popularizó la bombilla y el fonógrafo.')"></td>
+                <td><img src="zuckerberg.jpg" alt="Mark Zuckerberg" class="empresario siglo21" onmouseover="mostrarInfo('Mark Zuckerberg', 'Creador de Facebook. Transformó las redes sociales.')"></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div id="info-panel">
+        <p>Pasa el ratón sobre un personaje para ver información.</p>
+    </div>
+    
+    <button onclick="toggleFiltro('cientifico')">Filtrar Científicos</button>
+    <button onclick="toggleFiltro('empresario')">Filtrar Empresarios</button>
+    <button onclick="toggleFiltro('siglo21')">Filtrar Siglo 21</button>
+    <button onclick="resetear()">Restablecer</button>
+    
+    <script>
+        let filtrosActivos = new Set();
+
+        function mostrarInfo(nombre, descripcion) {
+            document.getElementById("info-panel").innerHTML = `<h3>${nombre}</h3><p>${descripcion}</p>`;
+        }
+
+        function toggleFiltro(clase) {
+            if (filtrosActivos.has(clase)) {
+                filtrosActivos.delete(clase);
+            } else {
+                filtrosActivos.add(clase);
+            }
+            aplicarFiltros();
+        }
+
+        function aplicarFiltros() {
+            document.querySelectorAll("img").forEach(img => {
+                img.classList.remove("resaltado");
+                if ([...filtrosActivos].every(filtro => img.classList.contains(filtro))) {
+                    img.classList.add("resaltado");
+                }
+            });
+        }
+
+        function resetear() {
+            filtrosActivos.clear();
+            document.querySelectorAll("img").forEach(img => img.classList.remove("resaltado"));
+        }
+    </script>
+</body>
+</html>

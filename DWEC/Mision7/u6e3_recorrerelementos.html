@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador de Formularios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        form {
+            background: rgb(92, 177, 216);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            margin-right: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <form id="miFormulario">
+        <label for="usuario">Usuario:</label>
+        <input type="text" name="usuario" id="usuario" value="miUsuario">
+        
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" name="email" id="email" value="correo@ejemplo.com">
+        
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" id="password" value="">
+        
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" name="telefono" id="telefono" value="123456789">
+        
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" id="edad" value="25">
+        
+        <label for="genero">Género:</label>
+        <select name="genero" id="genero">
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+        </select>
+        
+        <label>Intereses:</label>
+        <input type="checkbox" name="intereses" value="deporte"> Deporte
+        <input type="checkbox" name="intereses" value="musica"> Música
+        <input type="checkbox" name="intereses" value="cine"> Cine
+        
+        <label for="comentario">Comentarios:</label>
+        <textarea name="comentario" id="comentario">Este es un comentario</textarea>
+        
+        <button type="submit" id="enviar">Enviar</button>
+        <button type="button" id="analizar">Analizar Formulario</button>
+    </form>
+    
+    <div id="resultado"></div>
+    
+    <script>
+        document.getElementById("analizar").addEventListener("click", function() {
+            let formulario = document.getElementById("miFormulario");
+            let resultado = document.getElementById("resultado");
+            resultado.innerHTML = "";
+            let elementos = formulario.childNodes;
+            let contador = 1;
+
+            elementos.forEach(nodo => {
+                if (nodo.nodeType === 1) { // Elemento
+                    let mensaje = contador + ". " + nodo.tagName + ". ";
+                    
+                    if (nodo.tagName === "INPUT") {
+                        mensaje += "Tipo: " + nodo.type + ". Nombre: " + (nodo.name || "no tiene") + ". ";
+                        mensaje += "Clase: " + (nodo.className || "no tiene") + ". Id: " + (nodo.id || "no tiene") + ". ";
+                        mensaje += "Valor: " + (nodo.value || "vacío");
+                    } else if (nodo.tagName === "TEXTAREA" || nodo.tagName === "BUTTON") {
+                        mensaje += "Nombre: " + (nodo.name || "no tiene") + ". ";
+                        mensaje += "Clase: " + (nodo.className || "no tiene") + ". Id: " + (nodo.id || "no tiene") + ". ";
+                        mensaje += "Valor: " + (nodo.value || nodo.innerText || "vacío");
+                    } else if (nodo.tagName === "LABEL") {
+                        mensaje += "Nombre: " + (nodo.name || "no tiene") + ". ";
+                        mensaje += "Clase: " + (nodo.className || "no tiene") + ". Id: " + (nodo.id || "no tiene") + ". ";
+                        mensaje += "For: " + (nodo.htmlFor || "no tiene");
+                    } else if (nodo.tagName === "SELECT") {
+                        mensaje += "Nombre: " + (nodo.name || "no tiene") + ". ";
+                        mensaje += "Clase: " + (nodo.className || "no tiene") + ". Id: " + (nodo.id || "no tiene") + ". ";
+                        mensaje += "Opciones: ";
+                        let opciones = nodo.getElementsByTagName("option");
+                        for (let opt of opciones) {
+                            mensaje += opt.value + " ";
+                        }
+                    }
+                    
+                    resultado.innerHTML += mensaje + "<br>";
+                    contador++;
+                } else if (nodo.nodeType === 8) { // Comentario
+                    resultado.innerHTML += contador + ". Elemento de tipo comentario: " + nodo.nodeValue + "<br>";
+                    contador++;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

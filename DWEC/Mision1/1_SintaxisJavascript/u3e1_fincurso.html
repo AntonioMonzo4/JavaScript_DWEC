@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <p id="destino"></p>
+    
+</body>
+
+</html>
+
+<script>
+    let hoy = new Date();
+    let finCurso = new Date(2025,5,24); 
+
+    
+    let milisFinal=finCurso.getTime()-hoy.getTime();
+    
+    let dias= Math.ceil(milisFinal/1000/60/60/24);
+
+    let destino=document.getElementById("destino");
+    destino.innerHTML=dias;
+
+</script>

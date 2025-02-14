@@ -1,19 +1,16 @@
-const imagenesCartas = [
+let imagenesCartas = [
     '10b.jpg', '10b.jpg',
-    
     '4b.jpg', '4b.jpg',
-    
     '6b.jpg', '6b.jpg',
-    
     '8b.jpg', '8b.jpg'
 ];
-const reversoImagen = 'rever.jpg';
+let reversoImagen = 'rever.jpg';
 let objetosCartas = [];
 let puntos = 0;
 
 function mezclarCartas() {
     for (let i = imagenesCartas.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+            let j = Math.floor(Math.random() * (i + 1));
         [imagenesCartas[i], imagenesCartas[j]] = [imagenesCartas[j], imagenesCartas[i]];
     }
 }
@@ -31,20 +28,20 @@ function crearObjetosCartas() {
 }
 
 function actualizarContador() {
-    document.getElementById('contador').textContent = `Puntos: ${puntos}`;
+    document.getElementById('contador').textContent = "Puntos:"+ puntos;
 }
 
 function voltearCarta(elementoCarta, indice) {
-    const carta = objetosCartas[indice];
+    let carta = objetosCartas[indice];
     if (carta.volteada || carta.emparejada) return;
 
     carta.volteada = true;
     elementoCarta.classList.add('volteada');
 
-    const cartasVolteadas = objetosCartas.filter(c => c.volteada && !c.emparejada);
+    let cartasVolteadas = objetosCartas.filter(c => c.volteada && !c.emparejada);
 
     if (cartasVolteadas.length === 2) {
-        const [carta1, carta2] = cartasVolteadas;
+        let [carta1, carta2] = cartasVolteadas;
 
         if (carta1.imagen === carta2.imagen) {
             carta1.emparejada = true;
@@ -54,11 +51,21 @@ function voltearCarta(elementoCarta, indice) {
             puntos++;
             actualizarContador();
 
-            if (objetosCartas.every(c => c.emparejada)) {
+            let todasEmparejadas = true;
+
+            for (let i = 0; i < objetosCartas.length; i++) {
+                if (!objetosCartas[i].emparejada) {
+                    todasEmparejadas = false;
+                    break;
+                }
+            }
+            
+            if (todasEmparejadas) {
                 setTimeout(() => {
                     document.getElementById('mensajeVictoria').style.display = 'block';
                 }, 500);
             }
+            
         } else {
             setTimeout(() => {
                 carta1.volteada = false;
@@ -74,22 +81,22 @@ function inicializarJuego() {
     mezclarCartas();
     crearObjetosCartas();
 
-    const tablero = document.getElementById('tablero');
+    let tablero = document.getElementById('tablero');
     let contenidoHTML = '';
 
     for (let i = 0; i < objetosCartas.length; i++) {
         const carta = objetosCartas[i];
-        contenidoHTML += `
-            <div class="carta">
-                <img src="${reversoImagen}" class="reverso">
-                <img src="${carta.imagen}" class="frente">
-            </div>
-        `;
+        contenidoHTML += 
+        '<div class="carta">' +
+            '<img src="' + reversoImagen + '" class="reverso">' +
+            '<img src="' + carta.imagen + '" class="frente">' +
+        '</div>';
+    
     }
 
     tablero.innerHTML = contenidoHTML;
 
-    const cartasElementos = document.getElementsByClassName('carta');
+    let cartasElementos = document.getElementsByClassName('carta');
     for (let i = 0; i < cartasElementos.length; i++) {
         cartasElementos[i].addEventListener('click', () => voltearCarta(cartasElementos[i], i));
         objetosCartas[i].elemento = cartasElementos[i];
@@ -104,7 +111,7 @@ function reiniciarJuego() {
     inicializarJuego();
 }
 
-// Asignar evento al botón de reinicio
+
 document.getElementById('reiniciar').addEventListener('click', reiniciarJuego);
 
 inicializarJuego();

@@ -4,79 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Personajes</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+        }
+        img {
+            width: 150px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.2);
+        }
+        #info-panel {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid black;
+            display: inline-block;
+            background-color: #f9f9f9;
+        }
+        .resaltado {
+            border: 3px solid red;
         }
         .formulario {
             margin: 20px;
         }
-        .catalogo {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .carta {
-            border: 5px solid rgb(0, 0, 0);
-            border-radius: 15px;
-            padding: 10px;
-            width: 250px;
-            height: 350px;
-            text-align: center;
-            background-color: #7c9e72;
-        }
-        .carta img {
-            width: 150px;
-            height: 200px;
-        }
     </style>
 </head>
 <body>
-    <h1>Catálogo de Personajes</h1>
+    <h1>Personajes Icónicos de la Ciencia y Tecnología</h1>
 
-    <h4>Ejemplo de datos:</h4>
-        <p>
-            Nombre: Tesla Descripción: texto referente al susodicho URL: tesla.jpg
-        </p> 
-    
     <div class="formulario">
         <input type="text" id="nombre" placeholder="Nombre del personaje">
         <input type="text" id="descripcion" placeholder="Descripción">
         <input type="text" id="imagen" placeholder="URL de la imagen">
+        <select id="categoria">
+            <option value="cientifico">Científico</option>
+            <option value="empresario">Empresario</option>
+            <option value="siglo21">Siglo XXI</option>
+        </select>
         <button onclick="agregarFicha()">Añadir Personaje</button>
     </div>
-    
-    <div class="catalogo" id="catalogo"></div>
-    
+
+    <div class="container">
+        <table id="tabla-personajes">
+            <tbody>
+                <tr>
+                    <td><img src="tesla.jpg" alt="Nikola Tesla" class="cientifico" onmouseover="mostrarInfo('Nikola Tesla', 'Inventor e ingeniero eléctrico. Desarrolló la corriente alterna.')"></td>
+                    <td><img src="turing.jpg" alt="Alan Turing" class="cientifico" onmouseover="mostrarInfo('Alan Turing', 'Matemático y pionero de la computación. Descifró Enigma.')"></td>
+                    <td><img src="jobs.jpg" alt="Steve Jobs" class="empresario siglo21" onmouseover="mostrarInfo('Steve Jobs', 'Cofundador de Apple. Revolucionó la industria tecnológica.')"></td>
+                    <td><img src="hawking.jpg" alt="Stephen Hawking" class="cientifico siglo21" onmouseover="mostrarInfo('Stephen Hawking', 'Físico teórico. Contribuyó a la cosmología y agujeros negros.')"></td>
+                </tr>
+                <tr>
+                    <td><img src="musk.jpg" alt="Elon Musk" class="empresario siglo21" onmouseover="mostrarInfo('Elon Musk', 'CEO de Tesla y SpaceX. Innovador en tecnología aeroespacial.')"></td>
+                    <td><img src="gates.jpg" alt="Bill Gates" class="empresario siglo21" onmouseover="mostrarInfo('Bill Gates', 'Cofundador de Microsoft. Impulsor de la computación personal.')"></td>
+                    <td><img src="edison.jpg" alt="Thomas Edison" class="cientifico" onmouseover="mostrarInfo('Thomas Edison', 'Inventor. Popularizó la bombilla y el fonógrafo.')"></td>
+                    <td><img src="zuckerberg.jpg" alt="Mark Zuckerberg" class="empresario siglo21" onmouseover="mostrarInfo('Mark Zuckerberg', 'Creador de Facebook. Transformó las redes sociales.')"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="info-panel">
+        <p>Pasa el ratón sobre un personaje para ver información.</p>
+    </div>
+
+    <button onclick="filtro('cientifico')">Filtrar Científicos</button>
+    <button onclick="filtro('empresario')">Filtrar Empresarios</button>
+    <button onclick="filtro('siglo21')">Filtrar Siglo XXI</button>
+    <button onclick="resetear()">Restablecer</button>
+
     <script>
+        let filtrosActivos = new Set();
+        let personajesFila = 0;
+        let tabla = document.querySelector("#tabla-personajes tbody");
+
+        function mostrarInfo(nombre, descripcion) {
+            document.getElementById("info-panel").innerHTML = '<h3>'+nombre+'</h3><p>'+descripcion+'</p>';
+        }
+
+        function filtro(clase) {
+            if (filtrosActivos.has(clase)) {
+                filtrosActivos.delete(clase);
+            } else {
+                filtrosActivos.add(clase);
+            }
+            aplicarFiltros();
+        }
+
+        function aplicarFiltros() {
+            document.querySelectorAll("img").forEach(img => {
+                img.classList.remove("resaltado");
+                if ([...filtrosActivos].every(filtro => img.classList.contains(filtro))) {
+                    img.classList.add("resaltado");
+                }
+            });
+        }
+
+        function resetear() {
+            filtrosActivos.clear();
+            document.querySelectorAll("img").forEach(img => img.classList.remove("resaltado"));
+        }
+
         function agregarFicha() {
             let nombre = document.getElementById("nombre").value;
             let descripcion = document.getElementById("descripcion").value;
             let imagen = document.getElementById("imagen").value;
-            
+            let categoria = document.getElementById("categoria").value;
+
             if (!nombre || !descripcion || !imagen) {
                 alert("Por favor, completa todos los campos.");
                 return;
             }
-            
-            let carta = document.createElement("div");
-            carta.classList.add("carta");
-            carta.innerHTML = `
-                <img src="${imagen}" alt="${nombre}">
-                <h3>${nombre}</h3>
-                <p>${descripcion}</p>
-                <button onclick="eliminarFicha(this)">Eliminar</button>
-            `;
-            
-            document.getElementById("catalogo").appendChild(carta);
-        }
-        
-        function eliminarFicha(boton) {
-            boton.parentElement.remove();
+
+            let nuevaCelda = document.createElement("td");
+            let nuevaImagen = document.createElement("img");
+
+            nuevaImagen.src = imagen;
+            nuevaImagen.alt = nombre;
+            nuevaImagen.classList.add(categoria);
+            nuevaImagen.setAttribute("onmouseover", 'mostrarInfo('+nombre+', '+descripcion+')');
+
+            nuevaCelda.appendChild(nuevaImagen);
+
+            let ultimaFila = tabla.lastElementChild;
+            if (!ultimaFila || ultimaFila.children.length >= 4) {
+                let nuevaFila = document.createElement("tr");
+                nuevaFila.appendChild(nuevaCelda);
+                tabla.appendChild(nuevaFila);
+            } else {
+                ultimaFila.appendChild(nuevaCelda);
+            }
+
+            document.getElementById("nombre").value = "";
+            document.getElementById("descripcion").value = "";
+            document.getElementById("imagen").value = "";
         }
     </script>
 </body>

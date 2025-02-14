@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Personajes</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+           
             text-align: center;
         }
         .container {
@@ -66,19 +65,19 @@
         <p>Pasa el ratón sobre un personaje para ver información.</p>
     </div>
     
-    <button onclick="toggleFiltro('cientifico')">Filtrar Científicos</button>
-    <button onclick="toggleFiltro('empresario')">Filtrar Empresarios</button>
-    <button onclick="toggleFiltro('siglo21')">Filtrar Siglo 21</button>
+    <button onclick="filtro('cientifico')">Filtrar Científicos</button>
+    <button onclick="filtro('empresario')">Filtrar Empresarios</button>
+    <button onclick="filtro('siglo21')">Filtrar Siglo XXI</button>
     <button onclick="resetear()">Restablecer</button>
     
     <script>
         let filtrosActivos = new Set();
 
         function mostrarInfo(nombre, descripcion) {
-            document.getElementById("info-panel").innerHTML = `<h3>${nombre}</h3><p>${descripcion}</p>`;
+            document.getElementById("info-panel").innerHTML = '<h3>'+nombre+'</h3><p>'+descripcion+'</p>';
         }
 
-        function toggleFiltro(clase) {
+        function filtro(clase) {
             if (filtrosActivos.has(clase)) {
                 filtrosActivos.delete(clase);
             } else {

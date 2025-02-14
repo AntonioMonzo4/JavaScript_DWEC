@@ -23,7 +23,7 @@ function actualizarC() {
 
 function iniciarC() {
     if (!crono) {
-        intervaloCronometro = setInterval(() => {
+        intervaloCronometro = setInterval(() => { 
             tiempo++;
             actualizarC();
         }, 1000);
@@ -42,5 +42,4 @@ function reiniciarC() {
     actualizarC();
 }
 
-setInterval(actualizarReloj, 1000);
-actualizarC();
+

@@ -1,10 +1,10 @@
 
 
 var formato = true;
-var modo = 0; 
+var modo = 0;
 var luz = false;
 var crono = false;
-var tcrono = 0; 
+var tcrono = 0;
 var intervalo;
 
 var divH = document.getElementById("divH");
@@ -48,10 +48,10 @@ function actualizarReloj() {
 
 function formatoHpra() {
     if (modo === 0) {
-        if(formato){
+        if (formato) {
             formato = false;
-        }else{
-            formato=true;
+        } else {
+            formato = true;
         }
         actualizarReloj();
     }
@@ -61,11 +61,11 @@ function cambiaModo() {
     modo = (modo + 1) % 3;
 
     switch (modo) {
-        case 0: 
+        case 0:
             clearInterval(intervalo);
             actualizarReloj();
             break;
-        case 1: 
+        case 1:
             clearInterval(intervalo);
             crono = false;
             tcrono = 0;
@@ -75,7 +75,7 @@ function cambiaModo() {
             divAlar.textContent = "";
             divSignal.textContent = "";
             break;
-        case 2: 
+        case 2:
             clearInterval(intervalo);
             divH.textContent = "00";
             divM.textContent = "00";
@@ -89,19 +89,19 @@ function cambiaModo() {
 }
 
 function actualizarCrono() {
-    
+
     var minu = Math.floor(tcrono / 6000);
     var sec = Math.floor((tcrono % 6000) / 100);
     var mili = tcrono % 100;
 
     divH.textContent = minu.toString().padStart(2, '0');
     divM.textContent = sec.toString().padStart(2, '0');
-    divS.textContent =mili.toString().padStart(2,'0');
+    divS.textContent = mili.toString().padStart(2, '0');
 }
 
 
 function botonCrono() {
-    if (modo !== 1) return; 
+    if (modo !== 1) return;
 
     if (crono) {
         clearInterval(intervalo);

@@ -9,15 +9,30 @@
 
 <body>
     <script>
-        var jugadores = { nombre: "Pepe", dorsal: 4 };//Creación del Array
+        // var jugadores = { nombre: "Pepe", dorsal: 4 };//Creación del Array
+        var nombres= {"Jose":4,"Juan":8,"Alejandro":12,"Daniel":16,"Diego":20,"Antonio":24,"Angel":28,"Jesus":32,"Javier":36,"Paco":40};
+        
+        for(var x in nombres){
+            console.log(x+" "+nombres[x]);
+        }
+        
 
+        /*for( var x in nombres){
+            
+            nombreNum[x]={nombres[x] :num};
+            num+=4;
+            console.log(nombreNum[x]);
+
+        }
+
+        /*
         for (num = 4; num <= 40; num += 4) { //Bucle for para indicar el número
 
 
             jugadores.nombre = prompt("Indica el nombre del jugador y le asignarmos un dorsal.");
             jugadores.dorsal = num;
 
-            for (var x in jugadores) {//Bucle for in que muestra los jugadores
+            for (var x in nombres) {//Bucle for in que muestra los jugadores
             console.log(jugadores.nombre + " " + jugadores.dorsal);
 
         }
@@ -25,7 +40,7 @@
 
         }
 
-       
+       */
 
 
     </script>

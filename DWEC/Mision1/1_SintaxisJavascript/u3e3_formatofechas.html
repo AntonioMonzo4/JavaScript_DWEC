@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    
+</body>
+</html>
+<script>
+    var diasSemana = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+    var meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+   
+   
+    fechaUsuario=prompt("Selecciona formato:");
+    var dia = new Date(2024,5,24)
+
+    switch(fechaUsuario){
+        case "1":
+
+            console.log(dia.getDate()+"/"+dia.getMonth()+"/"+dia.getFullYear());
+
+            break;
+
+        case "2":
+            var dias=dia.getDay();
+
+            console.log(diasSemana[dias]+", "+dia.getDate()+" de "+meses[dia.getMonth()]+" de "+dia.getFullYear());
+            break;
+
+        case "3":
+
+            console.log();
+
+            break;
+        
+    }
+</script>

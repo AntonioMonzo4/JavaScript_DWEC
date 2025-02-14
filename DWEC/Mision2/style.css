@@ -6,18 +6,17 @@ body {
     color: #01579b; 
 }
 
-#reloj,
-#cronometro {
+#reloj, #cronometro {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #0277bd; /* Azul intermedio */
+    color: #0277bd; 
 }
 
 button {
     font-size: 1em;
     padding: 10px 20px;
     margin: 5px;
-    background-color: #0288d1; /* Azul vivo */
+    background-color: #0288d1;
     color: white;
     border: none;
     border-radius: 5px;
@@ -25,11 +24,11 @@ button {
 }
 
 button:hover {
-    background-color: #0277bd; /* Azul más oscuro al pasar el mouse */
+    background-color: #0277bd; 
 }
 
 #resultado {
     font-size: 1.2em;
-    color: #01579b; /* Azul oscuro para los resultados */
+    color: #01579b; 
     margin-top: 20px;
 }

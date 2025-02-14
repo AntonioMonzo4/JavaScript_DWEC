@@ -6,7 +6,6 @@
     <title>Analizador de Formularios</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 20px;
             padding: 20px;
@@ -99,7 +98,7 @@
             let contador = 1;
 
             elementos.forEach(nodo => {
-                if (nodo.nodeType === 1) { // Elemento
+                if (nodo.nodeType === 1) { 
                     let mensaje = contador + ". " + nodo.tagName + ". ";
                     
                     if (nodo.tagName === "INPUT") {
@@ -126,7 +125,7 @@
                     
                     resultado.innerHTML += mensaje + "<br>";
                     contador++;
-                } else if (nodo.nodeType === 8) { // Comentario
+                } else if (nodo.nodeType === 8) { 
                     resultado.innerHTML += contador + ". Elemento de tipo comentario: " + nodo.nodeValue + "<br>";
                     contador++;
                 }

@@ -11,11 +11,11 @@ function quiniela() {
 
         // Convertir los números en el resultado
         if (resultadoPartido === 0) {
-            Resultado.push("Partido " + i + ": Victoria local\n");
+            Resultado.push("-Partido " + (i+1) + ": 1\n");
         } else if (resultadoPartido === 1) {
-            Resultado.push("Partido " + i + ": Empate\n");
+            Resultado.push("-Partido " + (i+1) + ": X\n");
         } else if (resultadoPartido === 2) {
-            Resultado.push("Partido " + i + ": Victoria visitante\n");
+            Resultado.push("-Partido " + (i+1) + ": 2\n");
         }
     }
     return Resultado;
@@ -45,7 +45,7 @@ function generarLoteria() {
             resultado = "Lotería Nacional: " + ln();
             break;
         case "2":
-            resultado = "Quiniela: " + quiniela();
+            resultado = "Quiniela: \n" + quiniela();
             break;
         case "3":
             resultado = primitiva();

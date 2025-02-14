@@ -27,7 +27,7 @@ body {
 .carta {
     width: 22%;
     height: 310px;
-    background-color: #4CAF50;
+    background-color: #000000;
     border-radius: 10px;
     cursor: pointer;
     user-select: none;

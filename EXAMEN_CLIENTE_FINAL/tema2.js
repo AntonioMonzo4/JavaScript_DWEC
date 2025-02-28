@@ -27,6 +27,18 @@ array instanceof Array;
 typeof array; //devuelve el tipo 
 //Clonar array 
 let clon ={...array};//Para hacer copias usar parse y stringify
+array.join("separador");//devuelve cadena con todos los elementos del array
+array.push(elemneto);//añade al final el elemento si son varios se añaden en el orden seleccionado 
+array.pop()//devuelve el ultimo elemento de la fila y lo elimina 
+array.reverse()//invierte el orden del array
+//sort ordena alfabéticamnete
+array.slice(0,4);//devuelve los elementos del inicio 0 hasta eñl final 4 si no se indica este es el fin 
+
+
+
+
+
+
 
 if (condition) {
  //código   

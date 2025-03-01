@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="formulario.js"></script>
+<style>
+    .error { color: red; font-size: 14px; display: none; }
+</style>
+<body>
+    <form id="miFormulario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <span class="error" id="errorNombre">Nombre inválido</span>
+        <br>
+        
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni">
+        <span class="error" id="errorDni">DNI inválido (ej: 12345678-A)</span>
+        <br>
+        
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password">
+        <span class="error" id="errorPassword">Mínimo 6 caracteres</span>
+        <br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="errorEmail">Email inválido</span>
+        <br>
+        
+        <label for="fecha">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha" name="fecha">
+        <span class="error" id="errorFecha">Seleccione una fecha</span>
+        <br>
+        
+        <label for="opciones">Seleccione una opción:</label>
+        <select id="opciones" name="opciones">
+            <option value="">Seleccione...</option>
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+        </select>
+        <span class="error" id="errorOpciones">Seleccione una opción</span>
+        <br>
+        
+        <label>Género:</label>
+        <input type="radio" name="genero" value="masculino"> Masculino
+        <input type="radio" name="genero" value="femenino"> Femenino
+        <span class="error" id="errorGenero">Seleccione un género</span>
+        <br>
+        
+        <label>
+            <input type="checkbox" id="terminos"> Acepto los términos y condiciones
+        </label>
+        <span class="error" id="errorTerminos">Debe aceptar los términos</span>
+        <br>
+        
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

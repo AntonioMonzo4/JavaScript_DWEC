@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Validación</title>
+    <style>
+        .error { color: red; font-size: 14px; display: none; }
+    </style>
+    <script>
+        window.onload = function () {
+            document.getElementById("miFormulario").addEventListener("submit", function (event) {
+                if (!validarFormulario()) {
+                    event.preventDefault();
+                }
+            });
+            
+            document.getElementById("nombre").addEventListener("blur", validarNombre);
+            document.getElementById("fecha").addEventListener("blur", validarFecha);
+            document.getElementById("dni").addEventListener("blur", validarDni);
+            document.getElementById("opciones").addEventListener("blur", validarOpciones);
+            document.getElementsByName("genero").forEach(radio => radio.addEventListener("blur", validarGenero));
+            document.getElementById("terminos").addEventListener("blur", validarTerminos);
+        };
+
+        function validarNombre() {
+            let nombre = document.getElementById("nombre").value.trim();
+            let regexNombre = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{3,}$/;
+            let errorNombre = document.getElementById("errorNombre");
+            errorNombre.style.display = !regexNombre.test(nombre) ? "inline" : "none";
+        }
+
+        function validarFecha() {
+            let fecha = document.getElementById("fecha").value;
+            let errorFecha = document.getElementById("errorFecha");
+            if (!fecha) {
+                errorFecha.textContent = "Seleccione una fecha de nacimiento";
+                errorFecha.style.display = "inline";
+                return;
+            }
+            let hoy = new Date();
+            let nacimiento = new Date(fecha);
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            let mes = hoy.getMonth() - nacimiento.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+                edad--;
+            }
+            errorFecha.textContent = edad >= 18 ? "" : "Debe ser mayor de edad";
+            errorFecha.style.display = edad >= 18 ? "none" : "inline";
+        }
+
+        function validarDni() {
+            let dni = document.getElementById("dni").value.trim();
+            let regexDNI = /^\d{8}-[A-Za-z]$/;
+            let errorDni = document.getElementById("errorDni");
+            if (/^\d{8}[A-Za-z]$/.test(dni)) {
+                dni = dni.slice(0, 8) + "-" + dni.slice(8);
+                document.getElementById("dni").value = dni;
+            }
+            errorDni.style.display = regexDNI.test(dni) ? "none" : "inline";
+        }
+
+        function validarOpciones() {
+            let opciones = document.getElementById("opciones").value;
+            let errorOpciones = document.getElementById("errorOpciones");
+            errorOpciones.style.display = opciones === "" ? "inline" : "none";
+        }
+        
+        function validarGenero() {
+            let genero = document.querySelector("input[name='genero']:checked");
+            let errorGenero = document.getElementById("errorGenero");
+            errorGenero.style.display = genero ? "none" : "inline";
+        }
+        
+        function validarTerminos() {
+            let terminos = document.getElementById("terminos").checked;
+            let errorTerminos = document.getElementById("errorTerminos");
+            errorTerminos.style.display = terminos ? "none" : "inline";
+        }
+        
+        function validarFormulario() {
+            validarNombre();
+            validarFecha();
+            validarDni();
+            validarOpciones();
+            validarGenero();
+            validarTerminos();
+            
+            return document.querySelectorAll(".error[style='display: inline;']").length === 0;
+        }
+    </script>
+</head>
+<body>
+    <form id="miFormulario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <span class="error" id="errorNombre">Nombre inválido (mínimo 3 letras)</span>
+        <br>
+        
+        <label for="fecha">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha" name="fecha">
+        <span class="error" id="errorFecha"></span>
+        <br>
+        
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni">
+        <span class="error" id="errorDni">DNI inválido (ej: 12345678-A)</span>
+        <br>
+        
+        <label>
+            <input type="checkbox" id="terminos"> Acepto los términos y condiciones
+        </label>
+        <span class="error" id="errorTerminos">Debe aceptar los términos</span>
+        <br>
+        
+        <label for="opciones">Selecciona una opción:</label>
+        <select id="opciones" name="opciones">
+            <option value="">Seleccione...</option>
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+        </select>
+        <span class="error" id="errorOpciones">Seleccione una opción</span>
+        <br>
+        
+        <label>Género:</label>
+        <input type="radio" name="genero" value="masculino"> Masculino
+        <input type="radio" name="genero" value="femenino"> Femenino
+        <span class="error" id="errorGenero">Seleccione un género</span>
+        <br>
+        
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

@@ -5,15 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
         nombre: "manolo", //document.getElementById("btn").value
         password: 12345
     };
+
     btn.onclick = function () {
-        fetch('carga.php', {
+        fetch("carga.php", {
 
             method: 'POST',
             body: JSON.stringify(datos)
         })
             .then(response => {
                 if (!response.ok) {
-                    console.log("ERROR EN LA CARGA DE DATOS");
+                    console.log("Error al conectar");
                 }
                 return response.json();
             })
@@ -21,24 +22,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(data);
                 let tbody = document.getElementById("catalogo").getElementsByTagName("tbody")[0]; // Obtener tbody
 
-                data["CD"].forEach(disco => {
-                    let row = document.createElement("tr"); // Crear fila manualmente
+                data["CD"].forEach(element => {
+                    console.log(element);
+                   let v= document.createElement('tr');
+                    Object.values(element).forEach(e=>{
+                        let t=document.createElement('td');
 
-                    Object.values(disco).forEach(text => {
-                        let cell = document.createElement("td"); // Crear celda manualmente
-                        cell.textContent = text; // Asignar texto
-                        row.appendChild(cell); // Agregar celda a la fila
-                    });
+                        t.textContent=e;
 
-                    tbody.appendChild(row); // Agregar fila al tbody
+                        v.appendChild(t);
+                    })
+                    tbody.appendChild(v);
+                    
                 });
-                btn.style.display = "none";
+                btn.style.display="none";
+
             })
             .catch(error => {
 
-                console.log("ERROR", error);
+                console.log("ERROR",error);
             })
     }
 
 });
-

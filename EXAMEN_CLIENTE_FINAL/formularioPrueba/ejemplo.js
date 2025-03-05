@@ -86,6 +86,7 @@ function validarEmail(){
 
         error.textContent="No deje este campo vacío"
         error.style.display="inline";
+    
     }
 }
 

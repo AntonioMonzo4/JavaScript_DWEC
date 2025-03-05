@@ -27,7 +27,7 @@ function iniciarC() {
             tiempo++;
             actualizarC();
         }, 1000);
-        crono = true;
+        crono = true; 
     }
 }
 

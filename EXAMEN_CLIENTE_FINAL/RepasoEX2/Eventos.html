@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posición del Ratón</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #posicion {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <p>Posición actual del ratón:</p>
+    <p id="posicion">X: 0, Y: 0</p>
+
+    <script>
+        document.addEventListener("mousemove", function(event) {
+            let x = event.clientX;
+            let y = event.clientY;
+            document.getElementById("posicion").textContent = `X: ${x}, Y: ${y}`;
+        });
+    </script>
+</body>
+</html>

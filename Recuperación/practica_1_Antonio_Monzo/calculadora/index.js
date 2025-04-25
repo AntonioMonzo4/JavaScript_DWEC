@@ -1,125 +1,146 @@
 window.onload = function() {
-    const displayAnterior = document.getElementById('valor-anterior');
-    const displayActual = document.getElementById('valor-actual');
-    const botones = document.querySelectorAll('button');
+    var valorAnterior = document.getElementById('valor-anterior');
+    var valorActual = document.getElementById('valor-actual');
+    var botones = document.getElementsByTagName('button');
     
-    let numeroActual = '0';
-    let numeroAnterior = '';
-    let operacion = undefined;
-    let modoAreaTriangulo = false;
+    var numeroActual = '';
+    var numeroAnterior = '';
+    var operacion = '';
+    var resultadoMostrado = false;
+    var baseTriangulo = '';
 
     function actualizarDisplay() {
-        displayActual.textContent = numeroActual;
-        if (operacion) {
-            displayAnterior.textContent = numeroAnterior + ' ' + operacion;
+        valorActual.textContent = numeroActual || '0';
+        
+        if (baseTriangulo !== '') {
+            valorAnterior.textContent = 'Base: ' + baseTriangulo;
+        } else if (operacion && numeroAnterior) {
+            valorAnterior.textContent = numeroAnterior + ' ' + operacion;
         } else {
-            displayAnterior.textContent = '';
+            valorAnterior.textContent = '';
         }
     }
 
-    botones.forEach(boton => {
-        boton.addEventListener('click', () => {
-            if (boton.classList.contains('numero')) {
-                if (numeroActual === '0' || modoAreaTriangulo) {
-                    numeroActual = boton.textContent;
-                    modoAreaTriangulo = false;
-                } else {
-                    numeroActual += boton.textContent;
+    for (var i = 0; i < botones.length; i++) {
+        botones[i].addEventListener('click', function() {
+            if (this.className.includes('numero')) {
+                if (resultadoMostrado) {
+                    numeroActual = '';
+                    resultadoMostrado = false;
                 }
-                actualizarDisplay();
+                numeroActual += this.textContent;
+                valorActual.textContent = numeroActual;
                 return;
             }
-
-            if (boton.id === 'decimal') {
+            
+            if (this.id === 'decimal') {
                 if (!numeroActual.includes('.')) {
-                    numeroActual += '.';
-                    actualizarDisplay();
+                    numeroActual += numeroActual === '' ? '0.' : '.';
+                    valorActual.textContent = numeroActual;
                 }
                 return;
             }
-
-            if (boton.classList.contains('operador')) {
-                if (boton.id === 'igual') {
+            
+            if (this.className.includes('operador')) {
+                if (this.id === 'igual') {
                     calcular();
                     return;
                 }
                 
-                if (boton.id === 'areaT') {
-                    if (!numeroAnterior) {
-                        numeroAnterior = numeroActual;
-                        displayAnterior.textContent = 'Base: ' + numeroAnterior;
-                        numeroActual = '0';
-                        modoAreaTriangulo = true;
+                if (this.id === 'areaT') {
+                    if (baseTriangulo === '') {
+                        baseTriangulo = numeroActual || '0';
+                        numeroActual = '';
                     } else {
-                        const base = parseFloat(numeroAnterior);
-                        const altura = parseFloat(numeroActual);
+                        var base = parseFloat(baseTriangulo);
+                        var altura = parseFloat(numeroActual || '0');
                         numeroActual = (base * altura / 2).toString();
-                        displayAnterior.textContent = `Área Triángulo (${base}×${altura})`;
-                        numeroAnterior = '';
-                        actualizarDisplay();
+                        valorAnterior.textContent = 'Área Triángulo: ' + base + ' × ' + altura;
+                        baseTriangulo = '';
+                        resultadoMostrado = true;
                     }
-                    return;
-                }
-
-                if (boton.id === 'areaC') {
-                    const radio = parseFloat(numeroActual);
-                    numeroActual = (Math.PI * radio * radio).toFixed(4);
-                    displayAnterior.textContent = `Área Círculo (r=${radio})`;
                     actualizarDisplay();
                     return;
                 }
-
-                operacion = boton.textContent;
-                numeroAnterior = numeroActual;
-                numeroActual = '0';
-                actualizarDisplay();
-                return;
-            }
-
-            if (boton.id === 'borrar') {
-                numeroActual = numeroActual.slice(0, -1);
-                if (numeroActual === '') {
-                    numeroActual = '0';
+                
+                if (this.id === 'areaC') {
+                    var radio = parseFloat(numeroActual || '0');
+                    numeroActual = (Math.PI * radio * radio).toFixed(4);
+                    valorAnterior.textContent = 'Área Círculo (r=' + radio + ')';
+                    resultadoMostrado = true;
+                    actualizarDisplay();
+                    return;
                 }
+                
+                if (numeroAnterior !== '' && numeroActual === '') {
+                    operacion = this.textContent;
+                    actualizarDisplay();
+                    return;
+                }
+                
+                
+                if (numeroActual !== '') {
+                    if (numeroAnterior !== '') {
+                        calcular();
+                    }
+                    numeroAnterior = numeroActual;
+                    operacion = this.textContent;
+                    numeroActual = '';
+                    resultadoMostrado = false;
+                    actualizarDisplay();
+                }
+                return;
+            }
+            
+            if (this.id === 'borrar') {
+                numeroActual = numeroActual.slice(0, -1);
                 actualizarDisplay();
                 return;
             }
-
-            if (boton.id === 'borrarTodo') {
-                numeroActual = '0';
+            
+            if (this.id === 'borrarTodo') {
+                numeroActual = '';
                 numeroAnterior = '';
-                operacion = undefined;
-                modoAreaTriangulo = false;
+                operacion = '';
+                baseTriangulo = '';
+                resultadoMostrado = false;
                 actualizarDisplay();
             }
         });
-    });
+    }
 
     function calcular() {
-        let resultado;
-        const anterior = parseFloat(numeroAnterior);
-        const actual = parseFloat(numeroActual);
-
+        if (numeroAnterior === '' || operacion === '') return;
+        
+        var num1 = parseFloat(numeroAnterior);
+        var num2 = parseFloat(numeroActual || '0');
+        var resultado;
+        
         switch (operacion) {
             case '+':
-                resultado = anterior + actual;
+                resultado = num1 + num2;
                 break;
             case '-':
-                resultado = anterior - actual;
+                resultado = num1 - num2;
                 break;
             case 'X':
-                resultado = anterior * actual;
+                resultado = num1 * num2;
                 break;
             case '%':
-                resultado = anterior / actual;
+                if (num2 === 0) {
+                    alert("No se puede dividir por cero");
+                    return;
+                }
+                resultado = num1 / num2;
                 break;
             default:
                 return;
         }
-
+        
         numeroActual = resultado.toString();
-        operacion = undefined;
         numeroAnterior = '';
+        operacion = '';
+        resultadoMostrado = true;
         actualizarDisplay();
     }
 };

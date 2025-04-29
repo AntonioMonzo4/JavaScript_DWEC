@@ -60,4 +60,3 @@ Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 
 ---
 
-¡Gracias por visitar este repositorio! 😊 No dudes en ponerte en contacto si tienes preguntas o necesitas ayuda.

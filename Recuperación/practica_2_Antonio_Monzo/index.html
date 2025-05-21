@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj con Alarmas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="reloj">
+            <div id="hora">00:00:00</div>
+            <div id="fecha">Día, fecha </div>
+        </div>
+
+        <div class="formulario-alarma">
+            <h3>+ Nueva alarma</h3>
+            <div class="grupo-formulario">
+                <label for="etiqueta-alarma">Nombre Alarma:</label>
+                <input type="text" id="etiqueta-alarma" placeholder="Ej: Trabajo">
+            </div>
+            <div class="grupo-formulario entradas-tiempo">
+                <label>Hora:</label>
+                <input type="number" id="horas-alarma" min="0" max="23" value="0">
+                <label>Minutos:</label>
+                <input type="number" id="minutos-alarma" min="0" max="59" value="0">
+            </div>
+            <div class="grupo-formulario">
+                <label>Repetir:</label>
+                <div class="dias-semana">
+                    <button class="boton-dia" data-dia="lunes">L</button>
+                    <button class="boton-dia" data-dia="martes">M</button>
+                    <button class="boton-dia" data-dia="miercoles">X</button>
+                    <button class="boton-dia" data-dia="jueves">J</button>
+                    <button class="boton-dia" data-dia="viernes">V</button>
+                    <button class="boton-dia" data-dia="sabado">S</button>
+                    <button class="boton-dia" data-dia="domingo">D</button>
+                </div>
+            </div>
+            <button id="agregar-alarma">Añadir Alarma</button>
+        </div>
+
+        <div class="lista-alarmas">
+            <h3>Mis Alarmas</h3>
+            <div id="contenedor-alarmas">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

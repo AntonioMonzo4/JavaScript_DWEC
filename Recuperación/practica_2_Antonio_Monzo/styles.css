@@ -1,0 +1,175 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a2e1a;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    color: #e0e0e0;
+}
+
+.contenedor {
+    background-color: #2d4a2d;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.reloj {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#hora {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #a5d6a7;
+}
+
+#fecha {
+    font-size: 1.2rem;
+    color: #81c784;
+}
+
+.formulario-alarma {
+    background-color: #3d5a3d;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.grupo-formulario {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #a5d6a7;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #4a6b4a;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #2d4a2d;
+    color: #e0e0e0;
+}
+
+.entradas-tiempo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.entradas-tiempo input {
+    width: 60px;
+}
+
+.dias-semana {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.boton-dia {
+    background-color: #4a6b4a;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #e0e0e0;
+}
+
+.boton-dia.activo {
+    background-color: #2e7d32;
+    color: white;
+}
+
+button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #1b5e20;
+}
+
+.lista-alarmas {
+    background-color: #3d5a3d;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.item-alarma {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #2d4a2d;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.info-alarma {
+    flex-grow: 1;
+}
+
+.etiqueta-alarma {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #a5d6a7;
+}
+
+.hora-alarma {
+    color: #81c784;
+}
+
+.dias-alarma {
+    font-size: 0.8rem;
+    color: #689f38;
+}
+
+.acciones-alarma {
+    display: flex;
+    gap: 5px;
+}
+
+.acciones-alarma button {
+    width: auto;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.boton-eliminar {
+    background-color: #c62828;
+}
+
+.boton-eliminar:hover {
+    background-color: #b71c1c;
+}
+
+.boton-activar {
+    background-color: #0277bd;
+}
+
+.boton-activar:hover {
+    background-color: #01579b;
+}
+
+.boton-activar.inactivo {
+    background-color: #546e7a;
+}

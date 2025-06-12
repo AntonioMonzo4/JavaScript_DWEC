@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <script src="vformulario.js"></script>
+    <style>
+        .error {
+            border: solid 1px #F700FF;
+            background-color: #f6bebe;
+        }
+
+        .info {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="http://localhost:3000/usuarios.php" method="GET">
+        <table>
+            <tr>
+                <td colspan="2">
+                    <h2>Datos Usuario</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>Usuario:</td>
+                <td><input type="text" id="usuario" name="usuario"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td id="infousuario" class="info"></td>
+            </tr>
+            <tr>
+                <td>Contraseña:</td>
+                <td><input type="password" id="pwd" name="pwd"> </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td id="infopwd" class="info"></td>
+            </tr>
+            <tr>
+                <td>DNI:</td>
+                <td><input type="text" id="dni" name="dni"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td id="infodni" class="info"></td>
+            </tr>
+            <tr>
+                <td>Fecha de nacimiento:</td>
+                <td><input type="date" id="nacimiento" name="nacimiento"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td id="infonacimiento" class="info"></td>
+            </tr>
+            <tr>
+                <td>Rama:</td>
+                <td><select name="rama" id="rama">
+                        <option value="">Seleccione Rama</option>
+                        <option value="Sistemas">Sistemas</option>
+                        <option value="Web">Web</option>
+                        <option value="Programación">Programación</option>
+                    </select>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td id="inforama" class="info"></td>
+            </tr>
+            <tr>
+                <td>Horas de programación:</td>
+                <td>
+                    <input type="radio" name="horas" value="-1">-1h
+                    <input type="radio" name="horas" value="1-4">1-4h
+                    <input type="radio" name="horas" value="5-8">5-8h
+                    <input type="radio" name="horas" value="+8">+8h
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td id="infohoras" class="info"></td>
+            </tr>
+            <tr>
+                <td>Condiciciones:</td>
+                <td><input type="checkbox" name="condiciones" id="condiciones"><label for="condiciones">Acepto enviar
+                        este formulario</label></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td id="infocondiciones" class="info"></td>
+            </tr>
+        </table>
+        <p><input type="submit" id="enviar" value="Enviar">
+            <input type="reset" id="borrar" value="Borrar">
+        </p>
+        <p id="mensajeError"></p>
+    </form>
+
+</body>
+
+</html>

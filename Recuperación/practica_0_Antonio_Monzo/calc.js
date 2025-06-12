@@ -7,7 +7,7 @@ while (confirm("¿Quieres realizar una nueva operación?")) {
     if (operacion === "areaC") {
         resultado = Math.PI * Math.pow(operador1, 2);
     } else {
-        var operador2 = prompt("Introduce el segundo número:");
+        var operador2 = parseFloat(prompt("Introduce el segundo número:"));
         
         switch (operacion) {
             case "+":

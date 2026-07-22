@@ -1,0 +1,43 @@
+
+convertToRoman(36);
+
+function convertToRoman(num) {
+    // Definimos un arreglo de pares de valores romanos y sus correspondientes arábigos
+    const romanNumerals = [
+        { value: 1000, numeral: 'M' },
+        { value: 900, numeral: 'CM' },
+        { value: 500, numeral: 'D' },
+        { value: 400, numeral: 'CD' },
+        { value: 100, numeral: 'C' },
+        { value: 90, numeral: 'XC' },
+        { value: 50, numeral: 'L' },
+        { value: 40, numeral: 'XL' },
+        { value: 10, numeral: 'X' },
+        { value: 9, numeral: 'IX' },
+        { value: 5, numeral: 'V' },
+        { value: 4, numeral: 'IV' },
+        { value: 1, numeral: 'I' },
+    ];
+
+    let result = '';
+
+    // Iteramos sobre cada par de valor y numeral romano
+    for (const { value, numeral } of romanNumerals) {
+        // Mientras el número sea mayor o igual al valor romano
+        while (num >= value) {
+            result += numeral;  // Añadimos el numeral al resultado
+            num -= value;      // Reducimos el número
+        }
+    }
+
+    return result;  // Retornamos el resultado en mayúsculas
+}
+
+// Ejemplos de uso
+console.log(convertToRoman(1));    // I
+console.log(convertToRoman(4));    // IV
+console.log(convertToRoman(9));    // IX
+console.log(convertToRoman(58));   // LVIII
+console.log(convertToRoman(1994)); // MCMXCIV
+console.log(convertToRoman(2023)); // MMXXIII
+

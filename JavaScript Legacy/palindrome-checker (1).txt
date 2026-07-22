@@ -1,0 +1,11 @@
+function palindrome(str) {
+    // Eliminar caracteres no alfanuméricos y convertir a minúsculas
+    const cleanedStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    
+    // Invertir la cadena
+    const reversedStr = cleanedStr.split('').reverse().join('');
+    
+    // Comparar la cadena limpia con su versión invertida
+    return cleanedStr === reversedStr;
+}
+

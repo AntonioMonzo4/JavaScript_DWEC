@@ -1,0 +1,74 @@
+
+
+checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+
+
+function checkCashRegister(price, cash, cid) {
+    // Definimos las unidades monetarias y sus valores
+    const currencyUnits = {
+        "PENNY": 0.01,
+        "NICKEL": 0.05,
+        "DIME": 0.10,
+        "QUARTER": 0.25,
+        "ONE": 1.00,
+        "FIVE": 5.00,
+        "TEN": 10.00,
+        "TWENTY": 20.00,
+        "ONE HUNDRED": 100.00
+    };
+
+    // Calculamos el cambio que se debe devolver
+    let changeDue = cash - price;
+    
+    // Calculamos la cantidad total en el cajón
+    let totalCid = cid.reduce((acc, curr) => acc + curr[1], 0);
+    
+    // Convertimos el cajón a un formato más fácil de usar
+    let changeArr = cid.map(item => [item[0], item[1]]);
+
+    // Si el total en el cajón es menor que el cambio a devolver
+    if (totalCid < changeDue) {
+        return {status: "INSUFFICIENT_FUNDS", change: []};
+    }
+    
+    // Si el total en el cajón es igual al cambio a devolver
+    if (totalCid === changeDue) {
+        return {status: "CLOSED", change: changeArr};
+    }
+    
+    // Aquí inicia la lógica para devolver el cambio
+    let changeToGive = [];
+    
+    // Iteramos sobre las unidades de mayor a menor
+    for (let i = Object.keys(currencyUnits).length - 1; i >= 0; i--) {
+        const currencyName = Object.keys(currencyUnits)[i];
+        const currencyValue = currencyUnits[currencyName];
+        let amountInDrawer = cid[i][1];
+        let amountToReturn = 0;
+
+        // Mientras el cambio que se debe devolver sea mayor o igual al valor de la moneda
+        while (changeDue >= currencyValue && amountInDrawer > 0) {
+            changeDue -= currencyValue;
+            changeDue = Math.round(changeDue * 100) / 100; // Ajustar para evitar problemas de precisión
+            amountInDrawer -= currencyValue;
+            amountToReturn += currencyValue;
+        }
+
+        // Si se devolvió alguna cantidad de esta moneda, la agregamos al resultado
+        if (amountToReturn > 0) {
+            changeToGive.push([currencyName, amountToReturn]);
+        }
+    }
+
+    // Si después de intentar dar el cambio sigue habiendo cambio debido
+    if (changeDue > 0) {
+        return {status: "INSUFFICIENT_FUNDS", change: []};
+    }
+
+    return {status: "OPEN", change: changeToGive};
+}
+
+// Ejemplos de uso
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]));
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 5], ["TEN", 10], ["TWENTY", 20], ["ONE HUNDRED", 100]]));
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 5], ["TEN", 10], ["TWENTY", 20], ["ONE HUNDRED", 100]]));

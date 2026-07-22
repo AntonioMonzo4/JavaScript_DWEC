@@ -1,0 +1,30 @@
+
+
+rot13("SERR PBQR PNZC");
+
+
+function rot13(str) {
+    const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const output = 'NOPQRSTUVWXYZABCDEFGHIJKLM';
+    
+    // Crear un mapa de caracteres para la conversión
+    const vrot13Map = {};
+    for (let i = 0; i < input.length; i++) {
+        vrot13Map[input[i]] = output[i];
+    }
+
+    // Decodificar la cadena
+    let decodedStr = '';
+    for (let char of str) {
+        if (vrot13Map[char]) {
+            // Si el carácter está en el mapa, reemplazarlo
+            decodedStr += vrot13Map[char];
+        } else {
+            // Si no es una letra, dejarlo sin cambios
+            decodedStr += char;
+        }
+    }
+
+    return decodedStr; // Retornar la cadena decodificada
+}
+
